@@ -1,254 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Flappy Bird – Spelet, skaparen & historien</title>
-  <meta name="description" content="Startsida + spel + skapare + historia i en statisk sida för GitHub Pages." />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flappy Bird – Hemsida</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --gul: #f7c948; --mork: #1a1a2e; --yta: #16213e; --kant: #2a2f4a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Nunito',sans-serif; background:var(--mork); color:#fff; min-height:100vh; overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(26,26,46,0.96); border-bottom:3px solid var(--gul);
+    display:flex; align-items:center; padding:0 24px; height:58px; gap:6px;
+  }
+  .logo { font-family:'Press Start 2P',monospace; font-size:.7rem; color:var(--gul); text-decoration:none; margin-right:auto; }
+  nav a { font-family:'Press Start 2P',monospace; font-size:.46rem; color:#bbb; text-decoration:none; padding:7px 11px; border:2px solid transparent; border-radius:5px; transition:.15s; }
+  nav a:hover, nav a.on { color:var(--gul); border-color:var(--gul); background:rgba(247,201,72,.08); }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; padding-top:58px;
+    background:linear-gradient(180deg,#5ab4e8 0%,#87ceeb 45%,#aeddf5 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .cloud { position:absolute; background:#fff; border-radius:50px; opacity:.8; animation:sky linear infinite; }
+  .cloud::before,.cloud::after { content:''; position:absolute; background:#fff; border-radius:50%; }
+  .c1 { width:110px;height:34px;top:18%;animation-duration:20s;animation-delay:-4s; }
+  .c1::before{width:54px;height:54px;top:-27px;left:12px;}
+  .c1::after{width:40px;height:40px;top:-20px;left:48px;}
+  .c2 { width:80px;height:26px;top:36%;animation-duration:28s;animation-delay:-11s; }
+  .c2::before{width:40px;height:40px;top:-20px;left:8px;}
+  .c2::after{width:32px;height:32px;top:-15px;left:36px;}
+  .c3 { width:140px;height:42px;top:58%;animation-duration:16s;animation-delay:-7s; }
+  .c3::before{width:64px;height:64px;top:-32px;left:18px;}
+  .c3::after{width:50px;height:50px;top:-26px;left:60px;}
+  @keyframes sky { from{transform:translateX(-200px)} to{transform:translateX(110vw)} }
+
+  .ground-strip {
+    position:absolute; bottom:0; left:0; right:0; height:72px;
+    background:linear-gradient(#e2d078,#c8a84b);
+    border-top:5px solid #8b7535;
+  }
+  .ground-strip::after {
+    content:''; position:absolute; top:8px; left:0; right:0; height:4px;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 18px,transparent 18px 36px);
+  }
+
+  .bird-anim { font-size:5rem; animation:bob .85s ease-in-out infinite alternate; cursor:pointer; z-index:2; filter:drop-shadow(0 8px 20px rgba(0,0,0,.25)); }
+  @keyframes bob { from{transform:translateY(0) rotate(-5deg)} to{transform:translateY(-16px) rotate(6deg)} }
+
+  .hero-title { font-family:'Press Start 2P',monospace; font-size:clamp(1.3rem,5vw,2.6rem); text-align:center; z-index:2; padding:0 20px; color:#fff; text-shadow:4px 4px 0 #c49a00,8px 8px 0 rgba(0,0,0,.15); margin:12px 0 8px; }
+  .hero-title span { color:var(--gul); }
+  .hero-sub { z-index:2; font-size:1rem; color:rgba(255,255,255,.88); text-align:center; max-width:460px; padding:0 20px; }
+  .btns { display:flex; gap:14px; margin-top:28px; z-index:2; flex-wrap:wrap; justify-content:center; padding:0 20px; }
+  .btn { font-family:'Press Start 2P',monospace; font-size:.62rem; padding:13px 22px; border-radius:7px; border:none; cursor:pointer; text-decoration:none; display:inline-block; box-shadow:0 5px 0 rgba(0,0,0,.28); transition:.1s; }
+  .btn:active { transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.28); }
+  .btn-y { background:var(--gul); color:var(--mork); }
+  .btn-y:hover { background:#f0bc30; }
+  .btn-g { background:#4a9c3f; color:#fff; }
+  .btn-g:hover { background:#3d8433; }
+
+  /* CARDS */
+  .cards-sec { background:var(--mork); padding:72px 24px; }
+  .sec-title { font-family:'Press Start 2P',monospace; font-size:.95rem; color:var(--gul); text-align:center; margin-bottom:44px; text-shadow:2px 2px 0 #a07800; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; max-width:1000px; margin:0 auto; }
+  .card { background:rgba(255,255,255,.04); border:2px solid rgba(255,255,255,.09); border-radius:14px; padding:26px 22px; text-align:center; transition:.25s; text-decoration:none; color:inherit; display:block; }
+  .card:hover { border-color:var(--gul); transform:translateY(-5px); background:rgba(247,201,72,.06); box-shadow:0 14px 36px rgba(247,201,72,.13); }
+  .card-icon { font-size:2.6rem; margin-bottom:14px; display:block; }
+  .card h3 { font-family:'Press Start 2P',monospace; font-size:.6rem; color:var(--gul); margin-bottom:10px; line-height:1.7; }
+  .card p { font-size:.85rem; color:rgba(255,255,255,.68); line-height:1.65; }
+
+  /* FUN FACTS */
+  .facts-sec { background:var(--yta); padding:72px 24px; }
+  .fact-box { max-width:640px; margin:0 auto; text-align:center; }
+  .fact-text { font-size:1.1rem; line-height:1.8; color:rgba(255,255,255,.85); background:rgba(255,255,255,.04); border:2px solid rgba(247,201,72,.3); border-radius:14px; padding:28px; min-height:100px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; transition:.3s; }
+  .fact-btn { font-family:'Press Start 2P',monospace; font-size:.58rem; padding:12px 22px; background:var(--gul); color:var(--mork); border:none; border-radius:7px; cursor:pointer; box-shadow:0 4px 0 #a07800; transition:.1s; }
+  .fact-btn:active { transform:translateY(2px); box-shadow:0 2px 0 #a07800; }
+  .fact-btn:hover { background:#f0bc30; }
+
+  footer { background:#0d0d1a; border-top:3px solid var(--gul); text-align:center; padding:26px; font-family:'Press Start 2P',monospace; font-size:.45rem; color:rgba(255,255,255,.35); line-height:2.2; }
+  footer b { color:var(--gul); }
+
+  @media(max-width:520px){ nav a{font-size:.4rem;padding:6px 7px;} }
+</style>
 </head>
 <body>
-  <div class="container">
-    <header class="topbar">
-      <div class="brand" role="banner">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>Flappy Bird – spelet, skaparen & historien</h1>
-          <p>En minisajt med “sidor” + spel. Funkar som statisk GitHub Pages.</p>
-        </div>
-      </div>
 
-      <nav class="nav" aria-label="Meny">
-        <button class="chip" data-route="#start"><span class="dot"></span> Start</button>
-        <button class="chip" data-route="#spel"><span class="dot"></span> Spelet</button>
-        <button class="chip" data-route="#skaparen"><span class="dot"></span> Skaparen</button>
-        <button class="chip" data-route="#historien"><span class="dot"></span> Historien</button>
-      </nav>
-    </header>
+<nav>
+  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html" class="on">HEM</a>
+  <a href="spelet.html">SPELA</a>
+  <a href="skaparen.html">SKAPAREN</a>
+  <a href="historia.html">HISTORIA</a>
+</nav>
 
-    <!-- START -->
-    <main>
-      <section class="page" id="page-start" aria-label="Startsida">
-        <div class="grid-hero">
-          <article class="card">
-            <div class="inner">
-              <h2>Välkommen</h2>
-              <p class="muted">
-                Den här hemsidan finns för att visa en spelbar Flappy Bird-inspirerad version och samtidigt förklara
-                vem som skapade originalet och hur spelet blev ett globalt fenomen.
-              </p>
-
-              <div class="two">
-                <div>
-                  <h3>Vad kan man göra här?</h3>
-                  <ul>
-                    <li>Spela spelet direkt i webbläsaren (mobil + dator)</li>
-                    <li>Läsa om skaparen (Dong Nguyen) med bild</li>
-                    <li>Läsa historien och en enkel tidslinje</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3>Varför är detta intressant?</h3>
-                  <p class="muted">
-                    Flappy Bird är ett case om speldesign (enkel kontroll, svår precision) och viral spridning.
-                  </p>
-                  <div class="tags">
-                    <span class="tag">Viralitet</span>
-                    <span class="tag">Speldesign</span>
-                    <span class="tag">Mobilspel</span>
-                    <span class="tag">Indie</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn primary" data-route="#spel">Gå till spelet</button>
-                <button class="btn" data-route="#skaparen">Läs om skaparen</button>
-                <button class="btn" data-route="#historien">Läs historien</button>
-              </div>
-            </div>
-          </article>
-
-          <aside class="card">
-            <div class="inner">
-              <h2>Snabbinfo</h2>
-              <p class="muted">
-                Flappy Bird släpptes 2013 och exploderade i början av 2014. Spelet är lätt att förstå men svårt att bemästra.
-              </p>
-              <h3>Kontroller</h3>
-              <ul>
-                <li>Dator: Mellanslag eller klick</li>
-                <li>Mobil: tryck på skärmen</li>
-                <li>P: pausa</li>
-                <li>R: starta om</li>
-              </ul>
-              <div class="actions">
-                <button class="btn good" data-route="#spel">Starta och spela</button>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <!-- SPEL -->
-      <section class="page" id="page-spel" aria-label="Spelet">
-        <div class="card">
-          <div class="gameWrap">
-            <div class="gameTop">
-              <div class="pill">
-                Poäng: <b id="score">0</b> • Bästa: <b id="best">0</b>
-              </div>
-
-              <div class="btnrow">
-                <button class="btn primary" id="startBtn">Starta</button>
-                <button class="btn" id="restartBtn">Starta om</button>
-                <button class="btn" id="pauseBtn">Pausa</button>
-                <button class="btn" data-route="#start">Till startsidan</button>
-              </div>
-            </div>
-
-            <div class="canvasShell">
-              <canvas id="game" width="450" height="700" aria-label="Flappy Bird-inspirerat spel"></canvas>
-
-              <div class="overlay" id="startOverlay">
-                <div class="panel">
-                  <h3>Tryck för att flyga</h3>
-                  <p class="muted">
-                    Dator: <b>MELLANSLAG</b> eller klick.<br/>
-                    Mobil: tryck på skärmen.
-                  </p>
-                  <div class="panelRow">
-                    <div class="kbd">Kontroll: <span>Space</span> / <span>Tap</span></div>
-                    <button class="btn primary" id="overlayStart">Starta spelet</button>
-                  </div>
-                  <p class="muted small">Tips: små, jämna tryck ger bäst kontroll.</p>
-                </div>
-              </div>
-
-              <div class="overlay hidden" id="gameOverOverlay">
-                <div class="panel">
-                  <h3>Game Over</h3>
-                  <p class="muted">Du kraschade. Försök igen?</p>
-                  <div class="panelRow">
-                    <div class="kbd">Poäng: <span id="finalScore">0</span></div>
-                    <button class="btn primary" id="overlayRestart">Starta om</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="tags">
-              <span class="tag">Canvas</span>
-              <span class="tag">Mobilvänlig</span>
-              <span class="tag">Poäng + Bästa</span>
-              <span class="tag">Paus + Restart</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SKAPAREN -->
-      <section class="page" id="page-skaparen" aria-label="Skaparen">
-        <div class="card">
-          <div class="inner">
-            <h2>Skaparen</h2>
-            <p class="muted">
-              Flappy Bird skapades av den vietnamesiske utvecklaren <b>Dong Nguyen</b> (Nguyễn Hà Đông),
-              via hans indie-studio <b>.Gears</b>.
-            </p>
-
-            <div class="creatorRow">
-              <figure class="photo">
-                <img
-                  src="https://s.abcnews.com/images/Technology/gty_flappy_bird_nguyen_ha_dong_wy_140211_16x9_992.jpg?w=1200"
-                  alt="Dong Nguyen (2014)"
-                  loading="lazy"
-                />
-                <figcaption class="caption">
-                  Dong Nguyen (2014). Bildkälla: ABC News / AFP/Getty (illustrativ).
-                </figcaption>
-              </figure>
-
-              <div>
-                <h3>Varför han blev känd</h3>
-                <p class="muted">
-                  När spelet blev viralt hamnade skaparen i centrum. Flappy Bird blev ett case om hur snabbt en enkel idé kan skala.
-                </p>
-                <ul>
-                  <li>Indie-utvecklare</li>
-                  <li>Släppt 2013</li>
-                  <li>Studio: .Gears</li>
-                </ul>
-
-                <div class="actions">
-                  <button class="btn primary" data-route="#spel">Spela spelet</button>
-                  <button class="btn" data-route="#historien">Gå till historien</button>
-                  <button class="btn" data-route="#start">Till startsidan</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="tags">
-              <span class="tag">Indie</span>
-              <span class="tag">.Gears</span>
-              <span class="tag">Mobilspel</span>
-              <span class="tag">Viral framgång</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- HISTORIEN -->
-      <section class="page" id="page-historien" aria-label="Historien">
-        <div class="card">
-          <div class="inner">
-            <h2>Historien bakom Flappy Bird</h2>
-            <p class="muted">
-              Spelet släpptes 2013 men blev viralt i början av 2014. Enkel styrning + hög svårighetsgrad gjorde att folk delade
-              reaktioner och rekordförsök.
-            </p>
-
-            <div class="two">
-              <div>
-                <h3>Varför spelet fastnade</h3>
-                <ul>
-                  <li>Korta försök (snabb feedback)</li>
-                  <li>Enkel kontroll (1 tryck)</li>
-                  <li>Svårt att bemästra (precision)</li>
-                </ul>
-              </div>
-              <div>
-                <h3>Förenklad tidslinje</h3>
-                <ul>
-                  <li><b>2013:</b> Släpps på iOS.</li>
-                  <li><b>Jan 2014:</b> Blir viralt och toppar listor.</li>
-                  <li><b>Feb 2014:</b> Tas ned från appbutikerna.</li>
-                  <li><b>Efteråt:</b> Blir ett internetfenomen och inspirerar kopior.</li>
-                </ul>
-              </div>
-            </div>
-
-            <h3>Vad man kan lära sig</h3>
-            <p class="muted">
-              Flappy Bird visar att tajt mekanik och tydlig loop kan vara viktigare än mycket innehåll.
-            </p>
-
-            <div class="actions">
-              <button class="btn primary" data-route="#spel">Gå till spelet</button>
-              <button class="btn" data-route="#skaparen">Till skaparen</button>
-              <button class="btn" data-route="#start">Till startsidan</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <b>Google Sites:</b> Publicera detta via GitHub Pages och bädda in via <i>Infoga → Bädda in → URL</i>.
-      Om du klistrar in “Bädda in kod” kan JavaScript blockeras.
-    </footer>
+<section class="hero">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="bird-anim" onclick="this.style.animation='none';setTimeout(()=>this.style.animation='',50)">🐦</div>
+  <h1 class="hero-title">VÄLKOMMEN TILL<br><span>FLAPPY BIRD</span></h1>
+  <p class="hero-sub">Utforska spelet som tog världen med storm 2013. Spela, lär dig historien och möt skaparen bakom fenomenet.</p>
+  <div class="btns">
+    <a href="spelet.html" class="btn btn-y">▶ SPELA NU</a>
+    <a href="historia.html" class="btn btn-g">📖 HISTORIEN</a>
   </div>
+  <div class="ground-strip"></div>
+</section>
 
-  <script src="script.js"></script>
+<section class="cards-sec">
+  <h2 class="sec-title">UTFORSKA SIDAN</h2>
+  <div class="cards">
+    <a class="card" href="spelet.html">
+      <span class="card-icon">🎮</span>
+      <h3>SPELA FLAPPY BIRD</h3>
+      <p>Testa hur länge du klarar dig. Tryck mellanslag eller klicka för att flyga uppåt och undvika rören.</p>
+    </a>
+    <a class="card" href="skaparen.html">
+      <span class="card-icon">👨‍💻</span>
+      <h3>OM SKAPAREN</h3>
+      <p>Möt Dong Nguyen – den vietnamesiske utvecklaren som skapade spelet ensam på sin fritid.</p>
+    </a>
+    <a class="card" href="historia.html">
+      <span class="card-icon">📜</span>
+      <h3>HISTORIEN</h3>
+      <p>Hur gick ett okänt mobilspel viralt på 48 timmar och varför togs det sedan bort frivilligt?</p>
+    </a>
+  </div>
+</section>
+
+<section class="facts-sec">
+  <div class="fact-box">
+    <h2 class="sec-title">VISSTE DU ATT...</h2>
+    <div class="fact-text" id="factText">Tryck på knappen nedan för ett slumpmässigt faktum om Flappy Bird!</div>
+    <button class="fact-btn" onclick="newFact()">🎲 NYTT FAKTUM</button>
+  </div>
+</section>
+
+<footer>
+  <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
+  <div>Originalspelet skapat av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
+</footer>
+
+<script>
+const facts = [
+  "Flappy Bird laddades ner över 50 miljoner gånger på bara två månader!",
+  "Dong Nguyen tjänade ungefär 50 000 dollar PER DAG i reklamintäkter när spelet var som störst.",
+  "Spelet skapades på bara 2–3 dagar av en enda person.",
+  "Dong Nguyen tog frivilligt bort spelet den 9 februari 2014 – trots att det var gratis och populärt.",
+  "Telefoner med Flappy Bird installerat såldes på eBay för upp till 90 000 kronor efter borttagningen.",
+  "Rörens design är inspirerad av Super Mario Bros från Nintendo.",
+  "Spelet var tillgängligt i över 150 länder och låg etta på App Store i de flesta av dem.",
+  "Dong Nguyen fick ständiga meddelanden från spelare som sa att spelet förstörde deras liv.",
+  "Efter Flappy Bird skapade Nguyen Swing Copters och Ninja Spinki Challenges – men inget slog originalet.",
+  "Den gula fågeln heter officiellt 'Faby' i spelvärlden.",
+  "Flappy Bird lanserades i maj 2013 men gick inte viralt förrän januari 2014 – sju månader senare.",
+  "Spelet är känt som ett av de svåraste mobilspelen någonsin – de flesta klarar inte ens fem rör."
+];
+let lastIdx = -1;
+function newFact() {
+  let idx;
+  do { idx = Math.floor(Math.random() * facts.length); } while (idx === lastIdx);
+  lastIdx = idx;
+  const el = document.getElementById('factText');
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(6px)';
+  setTimeout(() => {
+    el.textContent = facts[idx];
+    el.style.transition = 'opacity .3s, transform .3s';
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, 200);
+}
+newFact();
+</script>
 </body>
 </html>
