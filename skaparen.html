@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skaparen – Dong Nguyen</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --gul:#f7c948; --mork:#1a1a2e; --yta:#16213e; --kant:#2a2f4a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Nunito',sans-serif; background:var(--mork); color:#fff; min-height:100vh; overflow-x:hidden; }
+
+  nav { position:fixed;top:0;left:0;right:0;z-index:100; background:rgba(26,26,46,.96); border-bottom:3px solid var(--gul); display:flex;align-items:center;padding:0 24px;height:58px;gap:6px; }
+  .logo { font-family:'Press Start 2P',monospace;font-size:.7rem;color:var(--gul);text-decoration:none;margin-right:auto; }
+  nav a { font-family:'Press Start 2P',monospace;font-size:.46rem;color:#bbb;text-decoration:none;padding:7px 11px;border:2px solid transparent;border-radius:5px;transition:.15s; }
+  nav a:hover, nav a.on { color:var(--gul);border-color:var(--gul);background:rgba(247,201,72,.08); }
+
+  .page { padding-top:58px; }
+
+  .hero-band {
+    background:linear-gradient(135deg,#0f3460 0%,#16213e 55%,#1a1a2e 100%);
+    padding:64px 24px 44px; text-align:center; position:relative; overflow:hidden;
+  }
+  .hero-band::before { content:'🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦🐦'; position:absolute;top:16px;left:0;right:0;font-size:1.1rem;opacity:.07;letter-spacing:18px;animation:scroll 14s linear infinite; }
+  @keyframes scroll { from{transform:translateX(-160px)} to{transform:translateX(160px)} }
+  .hero-band h1 { font-family:'Press Start 2P',monospace;font-size:clamp(.85rem,3vw,1.35rem);color:var(--gul);text-shadow:3px 3px 0 #a07800;margin-bottom:10px; }
+  .hero-band p { color:rgba(255,255,255,.55);font-size:.9rem;margin-top:6px; }
+
+  .content { max-width:880px;margin:0 auto;padding:48px 24px; }
+
+  .profile {
+    display:flex;gap:36px;align-items:flex-start;
+    background:rgba(255,255,255,.04);border:2px solid rgba(247,201,72,.25);
+    border-radius:18px;padding:32px;margin-bottom:44px;flex-wrap:wrap;
+  }
+  .portrait-wrap { flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px; }
+  .portrait { width:150px;height:150px;border-radius:14px;border:4px solid var(--gul);box-shadow:0 8px 28px rgba(247,201,72,.28);overflow:hidden;background:#1e3a5f; }
+  .portrait canvas { display:block;width:100%;height:100%;image-rendering:pixelated; }
+  .p-name { font-family:'Press Start 2P',monospace;font-size:.55rem;color:var(--gul);text-align:center;line-height:1.9; }
+  .profile-text { flex:1;min-width:200px; }
+  .profile-text h2 { font-family:'Press Start 2P',monospace;font-size:.95rem;color:var(--gul);margin-bottom:6px; }
+  .profile-text .sub { font-family:'Press Start 2P',monospace;font-size:.48rem;color:rgba(255,255,255,.45);margin-bottom:18px; }
+  .profile-text p { font-size:.92rem;line-height:1.8;color:rgba(255,255,255,.82);margin-bottom:10px; }
+
+  .stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:44px; }
+  .stat { background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.09);border-radius:11px;padding:18px 14px;text-align:center;transition:.25s; }
+  .stat:hover { border-color:var(--gul);transform:translateY(-4px); }
+  .stat-n { font-family:'Press Start 2P',monospace;font-size:1rem;color:var(--gul);display:block;margin-bottom:6px; }
+  .stat-l { font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.4; }
+
+  .sec-title { font-family:'Press Start 2P',monospace;font-size:.8rem;color:var(--gul);text-shadow:2px 2px 0 #a07800;margin-bottom:22px;padding-left:14px;border-left:4px solid var(--gul); }
+  .facts { display:flex;flex-direction:column;gap:14px;margin-bottom:44px; }
+  .fact { display:flex;gap:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:18px;align-items:flex-start;transition:.2s; }
+  .fact:hover { border-color:rgba(247,201,72,.35);background:rgba(247,201,72,.04); }
+  .fact-ico { font-size:1.6rem;flex-shrink:0; }
+  .fact h4 { font-family:'Press Start 2P',monospace;font-size:.55rem;color:var(--gul);margin-bottom:5px;line-height:1.6; }
+  .fact p { font-size:.86rem;color:rgba(255,255,255,.73);line-height:1.7; }
+
+  .quote { background:linear-gradient(135deg,rgba(247,201,72,.09),rgba(247,201,72,.03));border:2px solid rgba(247,201,72,.35);border-radius:16px;padding:30px;text-align:center;margin-bottom:44px; }
+  .quote blockquote { font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.88);line-height:1.85;margin-bottom:14px; }
+  .quote cite { font-family:'Press Start 2P',monospace;font-size:.48rem;color:rgba(255,255,255,.4); }
+
+  footer { background:#0d0d1a;border-top:3px solid var(--gul);text-align:center;padding:26px;font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(255,255,255,.35);line-height:2.2; }
+  footer b { color:var(--gul); }
+  @media(max-width:520px){ .profile{flex-direction:column;align-items:center;} nav a{font-size:.4rem;padding:6px 8px;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html">HEM</a>
+  <a href="spelet.html">SPELA</a>
+  <a href="skaparen.html" class="on">SKAPAREN</a>
+  <a href="historia.html">HISTORIA</a>
+</nav>
+
+<div class="page">
+  <div class="hero-band">
+    <h1>👨‍💻 OM SKAPAREN</h1>
+    <p>Mannen bakom världens mest beroendeframkallande spel</p>
+  </div>
+
+  <div class="content">
+
+    <div class="profile">
+      <div class="portrait-wrap">
+        <div class="portrait"><canvas id="pc" width="75" height="75"></canvas></div>
+        <div class="p-name">DONG NGUYEN<br>🇻🇳 VIETNAM</div>
+      </div>
+      <div class="profile-text">
+        <h2>Dong Nguyen</h2>
+        <div class="sub">INDIESPELUTVECKLARE · .GEARS STUDIOS</div>
+        <p>Dong Nguyen, känd online som <strong>"dong72"</strong>, är en vietnamesisk spelutvecklare från Hanoi. Han skapade Flappy Bird helt ensam – utan team, utan budget och på sin fritid.</p>
+        <p>Trots att spelet tjänade 50 000 dollar per dag valde Nguyen att ta bort det i februari 2014. Han uppgav att han ville skydda sin mentala hälsa och slippa det enorma mediefokuset.</p>
+        <p>Idag fortsätter han att utveckla spel under <strong>.GEARS Studios</strong>, men lever ett väldigt tillbakadraget liv borta från rampljuset.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-n">2013</span><span class="stat-l">Flappy Bird lanserades</span></div>
+      <div class="stat"><span class="stat-n">50M+</span><span class="stat-l">Nedladdningar på 2 månader</span></div>
+      <div class="stat"><span class="stat-n">$50K</span><span class="stat-l">Per dag i reklamintäkter</span></div>
+      <div class="stat"><span class="stat-n">1 pers.</span><span class="stat-l">Byggde hela spelet ensam</span></div>
+    </div>
+
+    <h2 class="sec-title">FAKTA OM NGUYEN</h2>
+    <div class="facts">
+      <div class="fact"><div class="fact-ico">🏠</div><div><h4>UPPVUXEN I HANOI</h4><p>Nguyen grew upp i Vietnams huvudstad och lärde sig programmera tidigt. Han hade alltid ett intresse för klassiska arkadspel.</p></div></div>
+      <div class="fact"><div class="fact-ico">⏱️</div><div><h4>SKAPADE SPELET PÅ 2–3 DAGAR</h4><p>Det grundläggande konceptet byggdes på några dagar. Nguyen ville ha ett spel man kunde spela med en hand, till exempel i tunnelbanan.</p></div></div>
+      <div class="fact"><div class="fact-ico">📱</div><div><h4>INSPIRERAD AV SUPER MARIO</h4><p>Rörens design kom direkt från Super Mario Bros. Nguyen ville ha ett igenkännbart hinder som alla förstod omedelbart.</p></div></div>
+      <div class="fact"><div class="fact-ico">💔</div><div><h4>ÅNGRADE SIG ÖVER BEROENDET</h4><p>Han fick ständiga meddelanden om att folk missade skolan eller jobbet på grund av spelet. Skulden över detta var en av orsakerna till att han tog bort det.</p></div></div>
+      <div class="fact"><div class="fact-ico">🎮</div><div><h4>FORTSÄTTER SKAPA SPEL</h4><p>Efter Flappy Bird kom Swing Copters (2014) och Ninja Spinki Challenges (2016) – men inget nådde samma nivå av popularitet.</p></div></div>
+    </div>
+
+    <div class="quote">
+      <blockquote>"Flappy Bird was designed to play in a few minutes when you are relaxed. But it happened to become an addictive product. I feel bad about this."</blockquote>
+      <cite>– DONG NGUYEN · ROLLING STONE · 2014</cite>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
+    <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
+  </footer>
+</div>
+
+<script>
+// Pixel art portrait
+const c = document.getElementById('pc'), x = c.getContext('2d');
+const p = (px,py,w,h,col) => { x.fillStyle=col; x.fillRect(px,py,w,h); };
+p(0,0,75,75,'#1e3a5f');
+p(22,11,30,9,'#1a1208'); p(19,17,37,7,'#1a1208'); // hair
+p(15,21,7,15,'#1a1208'); p(53,21,7,15,'#1a1208'); // sides
+p(19,19,37,30,'#d4956a'); p(17,27,4,14,'#d4956a'); p(54,27,4,14,'#d4956a'); // face
+p(24,29,7,5,'#fff'); p(44,29,7,5,'#fff'); // eye whites
+p(26,30,4,3,'#3a2010'); p(46,30,4,3,'#3a2010'); // iris
+p(27,31,2,2,'#000'); p(47,31,2,2,'#000'); // pupil
+p(31,29,2,2,'#fff'); p(51,29,2,2,'#fff'); // shine
+p(22,25,11,3,'#1a1208'); p(42,25,11,3,'#1a1208'); // brows
+p(34,37,7,4,'#c07850'); p(32,41,4,3,'#c07850'); p(40,41,4,3,'#c07850'); // nose
+p(26,47,23,3,'#8b4020'); p(24,45,4,4,'#8b4020'); p(47,45,4,4,'#8b4020'); // mouth
+p(28,49,19,3,'#e88060');
+p(15,29,6,7,'#d4956a'); p(54,29,6,7,'#d4956a'); // ears
+p(26,50,23,9,'#d4956a'); // neck
+p(8,59,59,17,'#2a4a8a'); p(26,50,23,11,'#2a4a8a'); // shirt
+p(22,57,11,6,'#fff'); p(42,57,11,6,'#fff'); // collar
+</script>
+</body>
+</html>
