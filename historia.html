@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historien om Flappy Bird</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --gul:#f7c948; --mork:#1a1a2e; --yta:#16213e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Nunito',sans-serif; background:var(--mork); color:#fff; min-height:100vh; overflow-x:hidden; }
+
+  nav { position:fixed;top:0;left:0;right:0;z-index:100; background:rgba(26,26,46,.96); border-bottom:3px solid var(--gul); display:flex;align-items:center;padding:0 24px;height:58px;gap:6px; }
+  .logo { font-family:'Press Start 2P',monospace;font-size:.7rem;color:var(--gul);text-decoration:none;margin-right:auto; }
+  nav a { font-family:'Press Start 2P',monospace;font-size:.46rem;color:#bbb;text-decoration:none;padding:7px 11px;border:2px solid transparent;border-radius:5px;transition:.15s; }
+  nav a:hover, nav a.on { color:var(--gul);border-color:var(--gul);background:rgba(247,201,72,.08); }
+
+  .page { padding-top:58px; }
+
+  .hero-band { background:linear-gradient(135deg,#2d0a0a 0%,#1a1a2e 55%,#0f3460 100%);padding:64px 24px 44px;text-align:center;position:relative;overflow:hidden; }
+  .hero-band::after { content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gul),transparent); }
+  .hero-band h1 { font-family:'Press Start 2P',monospace;font-size:clamp(.85rem,3vw,1.35rem);color:var(--gul);text-shadow:3px 3px 0 #a07800;margin-bottom:10px; }
+  .hero-band p { color:rgba(255,255,255,.55);font-size:.9rem;margin-top:6px; }
+
+  .content { max-width:840px;margin:0 auto;padding:52px 24px; }
+
+  .tl-title { font-family:'Press Start 2P',monospace;font-size:.85rem;color:var(--gul);text-shadow:2px 2px 0 #a07800;text-align:center;margin-bottom:40px; }
+
+  .tl { position:relative;padding-left:38px;margin-bottom:60px; }
+  .tl::before { content:'';position:absolute;left:11px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#f7c948,#5cb85c,#4ec0f4,#ff6b35,#e74c3c,#9b59b6);border-radius:2px; }
+
+  .tli { position:relative;margin-bottom:38px;animation:si .5s ease both; }
+  @keyframes si { from{opacity:0;transform:translateX(-18px)} to{opacity:1;transform:translateX(0)} }
+  .tli:nth-child(1){animation-delay:.05s}
+  .tli:nth-child(2){animation-delay:.1s}
+  .tli:nth-child(3){animation-delay:.15s}
+  .tli:nth-child(4){animation-delay:.2s}
+  .tli:nth-child(5){animation-delay:.25s}
+  .tli:nth-child(6){animation-delay:.3s}
+
+  .dot { position:absolute;left:-32px;top:5px;width:19px;height:19px;border-radius:50%;border:3px solid var(--mork);z-index:1; }
+  .date { font-family:'Press Start 2P',monospace;font-size:.5rem;color:rgba(255,255,255,.4);margin-bottom:5px; }
+  .card { background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:20px;transition:.2s;border-left:4px solid var(--ac); }
+  .card:hover { background:rgba(255,255,255,.07);transform:translateX(4px); }
+  .card h3 { font-family:'Press Start 2P',monospace;font-size:.6rem;color:var(--ac);margin-bottom:9px;line-height:1.7; }
+  .card p { font-size:.88rem;color:rgba(255,255,255,.76);line-height:1.8; }
+
+  .sec-title { font-family:'Press Start 2P',monospace;font-size:.8rem;color:var(--gul);text-shadow:2px 2px 0 #a07800;margin-bottom:24px;padding-left:14px;border-left:4px solid var(--gul); }
+
+  .why-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:52px; }
+  .why { background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:20px;transition:.2s; }
+  .why:hover { border-color:rgba(247,201,72,.35);transform:translateY(-3px); }
+  .why-ico { font-size:1.8rem;margin-bottom:9px;display:block; }
+  .why h4 { font-family:'Press Start 2P',monospace;font-size:.54rem;color:var(--gul);margin-bottom:7px;line-height:1.6; }
+  .why p { font-size:.84rem;color:rgba(255,255,255,.7);line-height:1.7; }
+
+  /* QUIZ */
+  .quiz-sec { background:var(--yta);border-radius:18px;padding:36px;margin-bottom:52px; }
+  .quiz-sec h2 { font-family:'Press Start 2P',monospace;font-size:.8rem;color:var(--gul);margin-bottom:24px;text-align:center;text-shadow:2px 2px 0 #a07800; }
+  .q-text { font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;min-height:48px;line-height:1.6; }
+  .q-opts { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px; }
+  .q-opt {
+    font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;
+    padding:12px 16px;border-radius:8px;border:2px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.04);color:#fff;cursor:pointer;transition:.15s;text-align:left;
+  }
+  .q-opt:hover:not(:disabled) { border-color:var(--gul);background:rgba(247,201,72,.08); }
+  .q-opt.correct { border-color:#4a9c3f;background:rgba(74,156,63,.2);color:#6dc460; }
+  .q-opt.wrong { border-color:#e74c3c;background:rgba(231,76,60,.18);color:#ff7b7b; }
+  .q-opt:disabled { cursor:default; }
+  .q-feedback { font-family:'Press Start 2P',monospace;font-size:.6rem;min-height:28px;margin-bottom:14px;line-height:1.8; }
+  .q-nav { display:flex;gap:12px;align-items:center;flex-wrap:wrap; }
+  .q-btn { font-family:'Press Start 2P',monospace;font-size:.55rem;padding:11px 20px;background:var(--gul);color:var(--mork);border:none;border-radius:7px;cursor:pointer;box-shadow:0 4px 0 #a07800;transition:.1s; }
+  .q-btn:active { transform:translateY(2px);box-shadow:0 2px 0 #a07800; }
+  .q-btn:hover { background:#f0bc30; }
+  .q-score { font-family:'Press Start 2P',monospace;font-size:.55rem;color:rgba(255,255,255,.45);margin-left:auto; }
+
+  .legacy { background:linear-gradient(135deg,rgba(247,201,72,.07),rgba(92,184,92,.07));border:2px solid rgba(247,201,72,.28);border-radius:18px;padding:38px;margin-bottom:44px;text-align:center; }
+  .legacy h2 { font-family:'Press Start 2P',monospace;font-size:.85rem;color:var(--gul);margin-bottom:18px; }
+  .legacy p { font-size:.93rem;color:rgba(255,255,255,.78);line-height:1.9;max-width:580px;margin:0 auto; }
+  .l-nums { display:flex;justify-content:center;gap:36px;margin-top:28px;flex-wrap:wrap; }
+  .l-n { text-align:center; }
+  .l-n span { font-family:'Press Start 2P',monospace;font-size:1.1rem;color:var(--gul);display:block;margin-bottom:5px; }
+  .l-n p { font-size:.72rem;color:rgba(255,255,255,.48); }
+
+  footer { background:#0d0d1a;border-top:3px solid var(--gul);text-align:center;padding:26px;font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(255,255,255,.35);line-height:2.2; }
+  footer b { color:var(--gul); }
+  @media(max-width:520px){ .why-grid{grid-template-columns:1fr;} .q-opts{grid-template-columns:1fr;} nav a{font-size:.4rem;padding:6px 8px;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html">HEM</a>
+  <a href="spelet.html">SPELA</a>
+  <a href="skaparen.html">SKAPAREN</a>
+  <a href="historia.html" class="on">HISTORIA</a>
+</nav>
+
+<div class="page">
+  <div class="hero-band">
+    <h1>📜 HISTORIEN OM FLAPPY BIRD</h1>
+    <p>Från okänd mobilapp till global sensation – och den dramatiska försvinnandet</p>
+  </div>
+
+  <div class="content">
+
+    <h2 class="tl-title">TIDSLINJE</h2>
+    <div class="tl">
+
+      <div class="tli" style="--ac:#5cb85c">
+        <div class="dot" style="background:#5cb85c"></div>
+        <div class="date">MAJ 2013</div>
+        <div class="card">
+          <h3>IDÉN FÖDS</h3>
+          <p>Dong Nguyen i Hanoi vill skapa ett enkelt avkopplande spel att spela med ett finger. Han tar inspiration från Super Mario-rörens design och bestämmer sig för en enda mekanik: tryck för att flyga, undvik rören.</p>
+        </div>
+      </div>
+
+      <div class="tli" style="--ac:#4ec0f4">
+        <div class="dot" style="background:#4ec0f4"></div>
+        <div class="date">SEPTEMBER 2013</div>
+        <div class="card">
+          <h3>TYST LANSERING</h3>
+          <p>Flappy Bird dyker upp i App Store utan marknadsföring. De första månaderna händer nästan ingenting. Nguyen tänker knappt på det och fortsätter sitt vanliga jobb.</p>
+        </div>
+      </div>
+
+      <div class="tli" style="--ac:#f7c948">
+        <div class="dot" style="background:#f7c948"></div>
+        <div class="date">JANUARI 2014</div>
+        <div class="card">
+          <h3>EXPLOSIV VIRAL TILLVÄXT</h3>
+          <p>Utan förvarning börjar spelet spridas viralt. Spelare delar sina frustrerade reaktioner och höga poäng på Twitter och YouTube. På några veckor klättrar Flappy Bird till plats 1 i App Store i USA och 100+ länder. Intäkterna når 50 000 dollar per dag.</p>
+        </div>
+      </div>
+
+      <div class="tli" style="--ac:#ff6b35">
+        <div class="dot" style="background:#ff6b35"></div>
+        <div class="date">FEBRUARI 2014</div>
+        <div class="card">
+          <h3>FRAMGÅNGENS PRIS</h3>
+          <p>Nguyen drunknar i mediaintervjuer, hatmeddelanden och tweets om hur spelet förstör folks liv. Journalister dyker upp utanför hans hem i Hanoi. Han beskriver det som sin "helvetesvecka".</p>
+        </div>
+      </div>
+
+      <div class="tli" style="--ac:#e74c3c">
+        <div class="dot" style="background:#e74c3c"></div>
+        <div class="date">9 FEBRUARI 2014</div>
+        <div class="card">
+          <h3>SPELET FÖRSVINNER</h3>
+          <p>Nguyen twittrar: "I am going to take Flappy Bird down. I cannot take this anymore." Nästa morgon är spelet borta. Telefoner med det installerat börjar säljas för tusentals dollar. Internet exploderar av teorier om varför han tog det bort.</p>
+        </div>
+      </div>
+
+      <div class="tli" style="--ac:#9b59b6">
+        <div class="dot" style="background:#9b59b6"></div>
+        <div class="date">2014 OCH FRAMÅT</div>
+        <div class="card">
+          <h3>EFTERDYNINGARNA</h3>
+          <p>Hundratals kloner fyller App Store. Nguyen lanserar Swing Copters och Ninja Spinki Challenges, men inget slår originalet. Flappy Bird förblir ett av mobilspelhistoriens mest ikoniska fenomen.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="sec-title">VARFÖR BLEV DET SÅ POPULÄRT?</h2>
+    <div class="why-grid">
+      <div class="why"><span class="why-ico">🎯</span><h4>ENKELT MEN BRUTALT SVÅRT</h4><p>Konceptet tar en sekund att förstå men timmar att bemästra. Det perfekta receptet för "one more try"-beroende.</p></div>
+      <div class="why"><span class="why-ico">📱</span><h4>EN-FINGER-KONTROLL</h4><p>Man behöver bara ett finger. Perfekt för pendeltåg, raster och korta stunder med telefonen.</p></div>
+      <div class="why"><span class="why-ico">🔥</span><h4>SOCIAL FRUSTRATION</h4><p>Folk delade sina misslyckanden på Twitter och YouTube. Frustrationen i sig var underhållande – en viral loop som förstärkte sig själv.</p></div>
+      <div class="why"><span class="why-ico">⭐</span><h4>RÄTT TID, RÄTT PLATS</h4><p>2014 var smartphone-ägandet på topp. Alla hade en telefon och letade efter nästa enkla spel att fastna för.</p></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-sec">
+      <h2>TESTA DINA KUNSKAPER</h2>
+      <div class="q-text" id="qText"></div>
+      <div class="q-opts" id="qOpts"></div>
+      <div class="q-feedback" id="qFeedback"></div>
+      <div class="q-nav">
+        <button class="q-btn" id="qNext" onclick="nextQ()" style="display:none">NÄSTA FRÅGA →</button>
+        <div class="q-score">RÄTT: <span id="qRight">0</span> / <span id="qTotal">0</span></div>
+      </div>
+    </div>
+
+    <div class="legacy">
+      <h2>FLAPPY BIRDS ARV</h2>
+      <p>Trots att spelet aktivt existerade i bara några månader har det lämnat ett permanent märke i spelkulturen. Det bevisade att ett enpersonsprojekt utan budget kan slå de största spelstudioerna – och inspirerade en hel generation indie-utvecklare.</p>
+      <div class="l-nums">
+        <div class="l-n"><span>50M+</span><p>Nedladdningar</p></div>
+        <div class="l-n"><span>#1</span><p>App Store 100+ länder</p></div>
+        <div class="l-n"><span>100+</span><p>Kloner skapade</p></div>
+        <div class="l-n"><span>1 person</span><p>Byggde alltihop</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
+    <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
+  </footer>
+</div>
+
+<script>
+const qs = [
+  { q:"När lanserades Flappy Bird?", opts:["Januari 2012","Maj 2013","Mars 2014","Oktober 2011"], a:1, exp:"Spelet lanserades i maj 2013 men gick viralt först i januari 2014." },
+  { q:"Vad heter skaparen av Flappy Bird?", opts:["Dong Nguyen","Kim Nguyen","Hieu Pham","Minh Tran"], a:0, exp:"Dong Nguyen, känd som dong72, skapade spelet ensam i Hanoi, Vietnam." },
+  { q:"Hur mycket tjänade Nguyen per dag när spelet var som störst?", opts:["$500","$5 000","$50 000","$500 000"], a:2, exp:"På höjden av populariteten tjänade Nguyen ungefär $50 000 per dag i reklamintäkter." },
+  { q:"Vilket spel inspirerade rörens design?", opts:["Angry Birds","Super Mario Bros","Tetris","Pac-Man"], a:1, exp:"Nguyen inspirerades direkt av rördesignen från Super Mario Bros." },
+  { q:"Varför tog Nguyen bort spelet?", opts:["Han sålde det till Apple","Han fick upphovsrättsproblem","Han mådde dåligt av uppmärksamheten","Det hade tekniska fel"], a:2, exp:"Nguyen uppgav att han inte kunde hantera det enorma mediefokuset och kände skuld för spelets beroendeframkallande natur." },
+  { q:"Hur många gånger laddades spelet ner på två månader?", opts:["5 miljoner","20 miljoner","50 miljoner","100 miljoner"], a:2, exp:"Flappy Bird laddades ner över 50 miljoner gånger på bara två månader." },
+  { q:"Vilket datum togs Flappy Bird bort?", opts:["1 januari 2014","9 februari 2014","15 mars 2014","30 april 2014"], a:1, exp:"Den 9 februari 2014 twittrade Nguyen att han skulle ta bort spelet, och nästa dag var det borta." },
+];
+
+let qi = 0, right = 0, answered = false;
+const shuffled = [...qs].sort(() => Math.random() - 0.5);
+
+function loadQ() {
+  answered = false;
+  const q = shuffled[qi];
+  document.getElementById('qText').textContent = (qi+1) + '. ' + q.q;
+  document.getElementById('qFeedback').textContent = '';
+  document.getElementById('qFeedback').style.color = '';
+  document.getElementById('qNext').style.display = 'none';
+  const opts = document.getElementById('qOpts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'q-opt';
+    btn.textContent = o;
+    btn.onclick = () => answer(i);
+    opts.appendChild(btn);
+  });
+}
+
+function answer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = shuffled[qi];
+  const btns = document.querySelectorAll('.q-opt');
+  btns.forEach(b => b.disabled = true);
+  if (idx === q.a) {
+    right++;
+    btns[idx].classList.add('correct');
+    document.getElementById('qFeedback').textContent = '✓ RÄTT! ' + q.exp;
+    document.getElementById('qFeedback').style.color = '#6dc460';
+  } else {
+    btns[idx].classList.add('wrong');
+    btns[q.a].classList.add('correct');
+    document.getElementById('qFeedback').textContent = '✗ FEL. ' + q.exp;
+    document.getElementById('qFeedback').style.color = '#ff7b7b';
+  }
+  document.getElementById('qRight').textContent = right;
+  document.getElementById('qTotal').textContent = qi + 1;
+  if (qi < shuffled.length - 1) {
+    document.getElementById('qNext').style.display = 'inline-block';
+  } else {
+    document.getElementById('qNext').style.display = 'inline-block';
+    document.getElementById('qNext').textContent = 'SE RESULTAT';
+  }
+}
+
+function nextQ() {
+  qi++;
+  if (qi >= shuffled.length) {
+    const pct = Math.round(right/shuffled.length*100);
+    document.getElementById('qText').textContent = 'QUIZ KLART! Du fick ' + right + ' av ' + shuffled.length + ' rätt (' + pct + '%)';
+    document.getElementById('qOpts').innerHTML = '';
+    document.getElementById('qFeedback').textContent = pct >= 80 ? '🏆 Utmärkt! Du kan din Flappy Bird-historia.' : pct >= 50 ? '👍 Bra jobbat! Läs gärna om historiken.' : '📖 Gå tillbaka och läs historiken igen!';
+    document.getElementById('qFeedback').style.color = '#f7c948';
+    document.getElementById('qNext').textContent = '↺ SPELA IGEN';
+    document.getElementById('qNext').onclick = () => { qi=0; right=0; shuffled.sort(()=>Math.random()-.5); loadQ(); document.getElementById('qRight').textContent=0; document.getElementById('qTotal').textContent=0; };
+    return;
+  }
+  loadQ();
+}
+
+loadQ();
+</script>
+</body>
+</html>
