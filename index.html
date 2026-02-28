@@ -6,83 +6,119 @@
 <title>Flappy Bird – Hemsida</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root { --gul: #f7c948; --mork: #1a1a2e; --yta: #16213e; --kant: #2a2f4a; }
+  :root {
+    --cyan: #00f5ff;
+    --cyan2: #00bcd4;
+    --mork: #050b14;
+    --yta: #0a1628;
+    --yta2: #0d1f35;
+    --kant: #0e2a40;
+    --text: #c8f0ff;
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Nunito',sans-serif; background:var(--mork); color:#fff; min-height:100vh; overflow-x:hidden; }
+  body { font-family:'Nunito',sans-serif; background:var(--mork); color:var(--text); min-height:100vh; overflow-x:hidden; }
 
   nav {
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(26,26,46,0.96); border-bottom:3px solid var(--gul);
+    background:rgba(5,11,20,0.97);
+    border-bottom:2px solid var(--cyan);
+    box-shadow:0 0 18px rgba(0,245,255,0.18);
     display:flex; align-items:center; padding:0 24px; height:58px; gap:6px;
   }
-  .logo { font-family:'Press Start 2P',monospace; font-size:.7rem; color:var(--gul); text-decoration:none; margin-right:auto; }
-  nav a { font-family:'Press Start 2P',monospace; font-size:.46rem; color:#bbb; text-decoration:none; padding:7px 11px; border:2px solid transparent; border-radius:5px; transition:.15s; }
-  nav a:hover, nav a.on { color:var(--gul); border-color:var(--gul); background:rgba(247,201,72,.08); }
+  .logo { font-family:'Press Start 2P',monospace; font-size:.7rem; color:var(--cyan); text-decoration:none; margin-right:auto; text-shadow:0 0 10px var(--cyan); }
+  nav a { font-family:'Press Start 2P',monospace; font-size:.46rem; color:#5599bb; text-decoration:none; padding:7px 11px; border:2px solid transparent; border-radius:4px; transition:.15s; }
+  nav a:hover, nav a.on { color:var(--cyan); border-color:var(--cyan); background:rgba(0,245,255,.07); box-shadow:0 0 10px rgba(0,245,255,.15); }
 
   /* HERO */
   .hero {
     min-height:100vh; padding-top:58px;
-    background:linear-gradient(180deg,#5ab4e8 0%,#87ceeb 45%,#aeddf5 100%);
+    background:radial-gradient(ellipse at 50% 0%, #0a2a4a 0%, #050b14 70%);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     position:relative; overflow:hidden;
   }
-  .cloud { position:absolute; background:#fff; border-radius:50px; opacity:.8; animation:sky linear infinite; }
-  .cloud::before,.cloud::after { content:''; position:absolute; background:#fff; border-radius:50%; }
-  .c1 { width:110px;height:34px;top:18%;animation-duration:20s;animation-delay:-4s; }
-  .c1::before{width:54px;height:54px;top:-27px;left:12px;}
-  .c1::after{width:40px;height:40px;top:-20px;left:48px;}
-  .c2 { width:80px;height:26px;top:36%;animation-duration:28s;animation-delay:-11s; }
-  .c2::before{width:40px;height:40px;top:-20px;left:8px;}
-  .c2::after{width:32px;height:32px;top:-15px;left:36px;}
-  .c3 { width:140px;height:42px;top:58%;animation-duration:16s;animation-delay:-7s; }
-  .c3::before{width:64px;height:64px;top:-32px;left:18px;}
-  .c3::after{width:50px;height:50px;top:-26px;left:60px;}
-  @keyframes sky { from{transform:translateX(-200px)} to{transform:translateX(110vw)} }
-
-  .ground-strip {
-    position:absolute; bottom:0; left:0; right:0; height:72px;
-    background:linear-gradient(#e2d078,#c8a84b);
-    border-top:5px solid #8b7535;
+  /* Grid lines */
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,245,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,.04) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:gridMove 8s linear infinite;
   }
-  .ground-strip::after {
-    content:''; position:absolute; top:8px; left:0; right:0; height:4px;
-    background:repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 18px,transparent 18px 36px);
+  @keyframes gridMove { from{background-position:0 0} to{background-position:0 40px} }
+
+  /* Scanlines */
+  .hero::after {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px);
   }
 
-  .bird-anim { font-size:5rem; animation:bob .85s ease-in-out infinite alternate; cursor:pointer; z-index:2; filter:drop-shadow(0 8px 20px rgba(0,0,0,.25)); }
+  .bird-anim { font-size:5rem; animation:bob .85s ease-in-out infinite alternate; cursor:pointer; z-index:2; filter:drop-shadow(0 0 20px rgba(0,245,255,.6)); }
   @keyframes bob { from{transform:translateY(0) rotate(-5deg)} to{transform:translateY(-16px) rotate(6deg)} }
 
-  .hero-title { font-family:'Press Start 2P',monospace; font-size:clamp(1.3rem,5vw,2.6rem); text-align:center; z-index:2; padding:0 20px; color:#fff; text-shadow:4px 4px 0 #c49a00,8px 8px 0 rgba(0,0,0,.15); margin:12px 0 8px; }
-  .hero-title span { color:var(--gul); }
-  .hero-sub { z-index:2; font-size:1rem; color:rgba(255,255,255,.88); text-align:center; max-width:460px; padding:0 20px; }
+  .hero-title {
+    font-family:'Press Start 2P',monospace; font-size:clamp(1.2rem,5vw,2.4rem);
+    text-align:center; z-index:2; padding:0 20px; color:#fff;
+    text-shadow:0 0 20px var(--cyan), 0 0 40px rgba(0,245,255,.4), 4px 4px 0 rgba(0,0,0,.5);
+    margin:12px 0 8px; line-height:1.5;
+  }
+  .hero-title span { color:var(--cyan); }
+  .hero-sub { z-index:2; font-size:1rem; color:rgba(200,240,255,.7); text-align:center; max-width:460px; padding:0 20px; }
   .btns { display:flex; gap:14px; margin-top:28px; z-index:2; flex-wrap:wrap; justify-content:center; padding:0 20px; }
-  .btn { font-family:'Press Start 2P',monospace; font-size:.62rem; padding:13px 22px; border-radius:7px; border:none; cursor:pointer; text-decoration:none; display:inline-block; box-shadow:0 5px 0 rgba(0,0,0,.28); transition:.1s; }
-  .btn:active { transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.28); }
-  .btn-y { background:var(--gul); color:var(--mork); }
-  .btn-y:hover { background:#f0bc30; }
-  .btn-g { background:#4a9c3f; color:#fff; }
-  .btn-g:hover { background:#3d8433; }
+  .btn { font-family:'Press Start 2P',monospace; font-size:.62rem; padding:13px 22px; border-radius:4px; border:2px solid; cursor:pointer; text-decoration:none; display:inline-block; transition:.15s; }
+  .btn:active { transform:translateY(2px); }
+  .btn-c { background:transparent; color:var(--cyan); border-color:var(--cyan); box-shadow:0 0 14px rgba(0,245,255,.3), inset 0 0 14px rgba(0,245,255,.05); }
+  .btn-c:hover { background:rgba(0,245,255,.1); box-shadow:0 0 24px rgba(0,245,255,.5); }
+  .btn-s { background:var(--cyan); color:#050b14; border-color:var(--cyan); box-shadow:0 0 18px rgba(0,245,255,.4); }
+  .btn-s:hover { background:#33f7ff; box-shadow:0 0 28px rgba(0,245,255,.7); }
 
   /* CARDS */
-  .cards-sec { background:var(--mork); padding:72px 24px; }
-  .sec-title { font-family:'Press Start 2P',monospace; font-size:.95rem; color:var(--gul); text-align:center; margin-bottom:44px; text-shadow:2px 2px 0 #a07800; }
+  .cards-sec { background:var(--mork); padding:72px 24px; position:relative; }
+  .cards-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+  .sec-title { font-family:'Press Start 2P',monospace; font-size:.9rem; color:var(--cyan); text-align:center; margin-bottom:44px; text-shadow:0 0 14px var(--cyan); }
   .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; max-width:1000px; margin:0 auto; }
-  .card { background:rgba(255,255,255,.04); border:2px solid rgba(255,255,255,.09); border-radius:14px; padding:26px 22px; text-align:center; transition:.25s; text-decoration:none; color:inherit; display:block; }
-  .card:hover { border-color:var(--gul); transform:translateY(-5px); background:rgba(247,201,72,.06); box-shadow:0 14px 36px rgba(247,201,72,.13); }
-  .card-icon { font-size:2.6rem; margin-bottom:14px; display:block; }
-  .card h3 { font-family:'Press Start 2P',monospace; font-size:.6rem; color:var(--gul); margin-bottom:10px; line-height:1.7; }
-  .card p { font-size:.85rem; color:rgba(255,255,255,.68); line-height:1.65; }
+  .card {
+    background:var(--yta); border:1px solid var(--kant);
+    border-radius:6px; padding:26px 22px; text-align:center;
+    transition:.25s; text-decoration:none; color:inherit; display:block;
+    position:relative; overflow:hidden;
+  }
+  .card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:0; transition:.25s; }
+  .card:hover { border-color:rgba(0,245,255,.4); transform:translateY(-5px); background:var(--yta2); box-shadow:0 0 30px rgba(0,245,255,.12), 0 14px 40px rgba(0,0,0,.4); }
+  .card:hover::before { opacity:1; }
+  .card-icon { font-size:2.4rem; margin-bottom:14px; display:block; filter:drop-shadow(0 0 8px rgba(0,245,255,.4)); }
+  .card h3 { font-family:'Press Start 2P',monospace; font-size:.58rem; color:var(--cyan); margin-bottom:10px; line-height:1.7; text-shadow:0 0 8px rgba(0,245,255,.4); }
+  .card p { font-size:.84rem; color:rgba(200,240,255,.6); line-height:1.65; }
 
-  /* FUN FACTS */
-  .facts-sec { background:var(--yta); padding:72px 24px; }
+  /* FACTS */
+  .facts-sec { background:var(--yta); padding:72px 24px; position:relative; }
+  .facts-sec::before, .facts-sec::after { content:''; position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+  .facts-sec::before { top:0; }
+  .facts-sec::after { bottom:0; }
   .fact-box { max-width:640px; margin:0 auto; text-align:center; }
-  .fact-text { font-size:1.1rem; line-height:1.8; color:rgba(255,255,255,.85); background:rgba(255,255,255,.04); border:2px solid rgba(247,201,72,.3); border-radius:14px; padding:28px; min-height:100px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; transition:.3s; }
-  .fact-btn { font-family:'Press Start 2P',monospace; font-size:.58rem; padding:12px 22px; background:var(--gul); color:var(--mork); border:none; border-radius:7px; cursor:pointer; box-shadow:0 4px 0 #a07800; transition:.1s; }
-  .fact-btn:active { transform:translateY(2px); box-shadow:0 2px 0 #a07800; }
-  .fact-btn:hover { background:#f0bc30; }
+  .fact-text {
+    font-size:1rem; line-height:1.8; color:rgba(200,240,255,.88);
+    background:var(--yta2); border:1px solid rgba(0,245,255,.2);
+    border-radius:6px; padding:28px; min-height:100px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px; box-shadow:inset 0 0 20px rgba(0,245,255,.04);
+    transition:.3s;
+  }
+  .fact-btn {
+    font-family:'Press Start 2P',monospace; font-size:.58rem; padding:12px 22px;
+    background:transparent; color:var(--cyan); border:2px solid var(--cyan);
+    border-radius:4px; cursor:pointer; box-shadow:0 0 14px rgba(0,245,255,.25);
+    transition:.15s;
+  }
+  .fact-btn:hover { background:rgba(0,245,255,.1); box-shadow:0 0 22px rgba(0,245,255,.45); }
 
-  footer { background:#0d0d1a; border-top:3px solid var(--gul); text-align:center; padding:26px; font-family:'Press Start 2P',monospace; font-size:.45rem; color:rgba(255,255,255,.35); line-height:2.2; }
-  footer b { color:var(--gul); }
+  footer {
+    background:#030810; border-top:1px solid var(--kant);
+    text-align:center; padding:26px;
+    font-family:'Press Start 2P',monospace; font-size:.45rem;
+    color:rgba(200,240,255,.25); line-height:2.2;
+  }
+  footer b { color:var(--cyan); text-shadow:0 0 8px var(--cyan); }
 
   @media(max-width:520px){ nav a{font-size:.4rem;padding:6px 7px;} }
 </style>
@@ -98,21 +134,17 @@
 </nav>
 
 <section class="hero">
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
-  <div class="bird-anim" onclick="this.style.animation='none';setTimeout(()=>this.style.animation='',50)">🐦</div>
+  <div class="bird-anim">🐦</div>
   <h1 class="hero-title">VÄLKOMMEN TILL<br><span>FLAPPY BIRD</span></h1>
   <p class="hero-sub">Utforska spelet som tog världen med storm 2013. Spela, lär dig historien och möt skaparen bakom fenomenet.</p>
   <div class="btns">
-    <a href="spelet.html" class="btn btn-y">▶ SPELA NU</a>
-    <a href="historia.html" class="btn btn-g">📖 HISTORIEN</a>
+    <a href="spelet.html" class="btn btn-s">▶ SPELA NU</a>
+    <a href="historia.html" class="btn btn-c">📖 HISTORIEN</a>
   </div>
-  <div class="ground-strip"></div>
 </section>
 
 <section class="cards-sec">
-  <h2 class="sec-title">UTFORSKA SIDAN</h2>
+  <h2 class="sec-title">// UTFORSKA SIDAN</h2>
   <div class="cards">
     <a class="card" href="spelet.html">
       <span class="card-icon">🎮</span>
@@ -134,15 +166,15 @@
 
 <section class="facts-sec">
   <div class="fact-box">
-    <h2 class="sec-title">VISSTE DU ATT...</h2>
-    <div class="fact-text" id="factText">Tryck på knappen nedan för ett slumpmässigt faktum om Flappy Bird!</div>
-    <button class="fact-btn" onclick="newFact()">🎲 NYTT FAKTUM</button>
+    <h2 class="sec-title">// VISSTE DU ATT...</h2>
+    <div class="fact-text" id="factText">Laddar faktum...</div>
+    <button class="fact-btn" onclick="newFact()">⚡ NYTT FAKTUM</button>
   </div>
 </section>
 
 <footer>
   <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
-  <div>Originalspelet skapat av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
+  <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
 </footer>
 
 <script>
@@ -150,30 +182,21 @@ const facts = [
   "Flappy Bird laddades ner över 50 miljoner gånger på bara två månader!",
   "Dong Nguyen tjänade ungefär 50 000 dollar PER DAG i reklamintäkter när spelet var som störst.",
   "Spelet skapades på bara 2–3 dagar av en enda person.",
-  "Dong Nguyen tog frivilligt bort spelet den 9 februari 2014 – trots att det var gratis och populärt.",
+  "Dong Nguyen tog frivilligt bort spelet den 9 februari 2014 – trots att det var gratis och extremt populärt.",
   "Telefoner med Flappy Bird installerat såldes på eBay för upp till 90 000 kronor efter borttagningen.",
   "Rörens design är inspirerad av Super Mario Bros från Nintendo.",
-  "Spelet var tillgängligt i över 150 länder och låg etta på App Store i de flesta av dem.",
-  "Dong Nguyen fick ständiga meddelanden från spelare som sa att spelet förstörde deras liv.",
-  "Efter Flappy Bird skapade Nguyen Swing Copters och Ninja Spinki Challenges – men inget slog originalet.",
-  "Den gula fågeln heter officiellt 'Faby' i spelvärlden.",
+  "Spelet låg etta på App Store i över 150 länder.",
+  "Nguyen fick ständiga meddelanden från spelare som sa att spelet förstörde deras liv.",
   "Flappy Bird lanserades i maj 2013 men gick inte viralt förrän januari 2014 – sju månader senare.",
-  "Spelet är känt som ett av de svåraste mobilspelen någonsin – de flesta klarar inte ens fem rör."
+  "Spelet är känt som ett av de svåraste mobilspelen någonsin – de flesta klarar inte fem rör."
 ];
-let lastIdx = -1;
+let last = -1;
 function newFact() {
-  let idx;
-  do { idx = Math.floor(Math.random() * facts.length); } while (idx === lastIdx);
-  lastIdx = idx;
+  let i; do { i = Math.floor(Math.random()*facts.length); } while(i===last);
+  last = i;
   const el = document.getElementById('factText');
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(6px)';
-  setTimeout(() => {
-    el.textContent = facts[idx];
-    el.style.transition = 'opacity .3s, transform .3s';
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-  }, 200);
+  el.style.opacity='0'; el.style.transform='translateY(6px)';
+  setTimeout(()=>{ el.textContent=facts[i]; el.style.transition='opacity .3s,transform .3s'; el.style.opacity='1'; el.style.transform='translateY(0)'; },180);
 }
 newFact();
 </script>
