@@ -3,75 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Görgen – Flappy Bird Chatbot</title>
+<title>Görgen – Flappy Universe</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root { --cyan:#00f5ff; --mork:#050b14; --yta:#0a1628; --yta2:#0d1f35; --kant:#0e2a40; --text:#c8f0ff; }
+  :root { --guld:#c9a84c; --guld2:#e8c97a; --mork:#1a1008; --yta:#241808; --yta2:#2e2010; --kant:#4a3418; --text:#f5ead8; --creme:#f9f3e8; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Nunito',sans-serif; background:var(--mork); color:var(--text); min-height:100vh; overflow-x:hidden; display:flex; flex-direction:column; }
-  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,11,20,.97);border-bottom:2px solid var(--cyan);box-shadow:0 0 18px rgba(0,245,255,.18);display:flex;align-items:center;padding:0 16px;height:58px;gap:4px; }
-  .logo { font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--cyan);text-decoration:none;margin-right:auto;text-shadow:0 0 10px var(--cyan);white-space:nowrap; }
-  nav a { font-family:'Press Start 2P',monospace;font-size:.4rem;color:#5599bb;text-decoration:none;padding:6px 9px;border:2px solid transparent;border-radius:4px;transition:.15s;white-space:nowrap; }
-  nav a:hover,nav a.on { color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.07);box-shadow:0 0 10px rgba(0,245,255,.15); }
-  .page { padding-top:58px;flex:1;display:flex;flex-direction:column; }
-  .hero-band { background:radial-gradient(ellipse at 50% 0%,#071e38 0%,#050b14 80%);padding:36px 24px 28px;text-align:center;position:relative;overflow:hidden;flex-shrink:0; }
-  .hero-band::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.03) 1px,transparent 1px);background-size:36px 36px; }
-  .hero-band::after { content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .hero-band h1 { font-family:'Press Start 2P',monospace;font-size:clamp(.85rem,3vw,1.3rem);color:var(--cyan);text-shadow:0 0 18px var(--cyan);margin-bottom:8px;position:relative; }
-  .hero-band p { color:rgba(200,240,255,.5);font-size:.88rem;position:relative; }
-  .chat-wrap { flex:1;display:flex;flex-direction:column;max-width:860px;width:100%;margin:0 auto;padding:24px 20px 0; }
-  .gorgen-header { display:flex;align-items:center;gap:16px;background:var(--yta);border:1px solid var(--kant);border-radius:8px 8px 0 0;padding:16px 20px;border-bottom:1px solid rgba(0,245,255,.2);position:relative;overflow:hidden;flex-shrink:0; }
-  .gorgen-header::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .gorgen-avatar { width:48px;height:48px;border-radius:50%;border:2px solid var(--cyan);background:#071828;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;box-shadow:0 0 16px rgba(0,245,255,.35);animation:pulse 2.5s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{box-shadow:0 0 16px rgba(0,245,255,.35)} 50%{box-shadow:0 0 28px rgba(0,245,255,.7)} }
-  .gorgen-name { font-family:'Press Start 2P',monospace;font-size:.7rem;color:var(--cyan);text-shadow:0 0 8px var(--cyan);margin-bottom:4px; }
-  .gorgen-status { font-size:.78rem;color:rgba(200,240,255,.45);display:flex;align-items:center;gap:6px; }
-  .status-dot { width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:blink 1.5s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
-  #messages { flex:1;overflow-y:auto;padding:20px;background:var(--yta2);border-left:1px solid var(--kant);border-right:1px solid var(--kant);display:flex;flex-direction:column;gap:16px;min-height:380px;max-height:480px;scrollbar-width:thin;scrollbar-color:var(--kant) transparent; }
-  #messages::-webkit-scrollbar { width:6px; }
-  #messages::-webkit-scrollbar-thumb { background:var(--kant);border-radius:3px; }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,16,8,.98);border-bottom:1px solid var(--guld);box-shadow:0 2px 24px rgba(201,168,76,.12);display:flex;align-items:center;padding:0 32px;height:62px;gap:4px; }
+  .logo { font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--guld);text-decoration:none;margin-right:auto;letter-spacing:1px; }
+  nav a { font-family:'Press Start 2P',monospace;font-size:.38rem;color:rgba(245,234,216,.5);text-decoration:none;padding:7px 11px;border:1px solid transparent;border-radius:2px;transition:.2s;white-space:nowrap; }
+  nav a:hover,nav a.on { color:var(--guld);border-color:var(--guld);background:rgba(201,168,76,.07); }
+  .page { padding-top:62px;flex:1;display:flex;flex-direction:column; }
+  .hero-band { background:radial-gradient(ellipse at 50% 0%,#2e1e08 0%,#1a1008 80%);padding:48px 32px 36px;text-align:center;position:relative;overflow:hidden;flex-shrink:0; }
+  .hero-band::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px);background-size:60px 60px; }
+  .hero-band::after { content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--guld),transparent); }
+  .sec-label { font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--guld);letter-spacing:4px;margin-bottom:10px;opacity:.6;position:relative; }
+  .hero-band h1 { font-family:'Press Start 2P',monospace;font-size:clamp(.85rem,3vw,1.3rem);color:var(--creme);margin-bottom:8px;position:relative;letter-spacing:1px; }
+  .hero-band p { color:rgba(245,234,216,.45);font-size:.88rem;position:relative; }
+  .chat-wrap { flex:1;display:flex;flex-direction:column;max-width:860px;width:100%;margin:0 auto;padding:28px 32px 0; }
+  .gorgen-header { display:flex;align-items:center;gap:16px;background:var(--yta);border:1px solid var(--kant);border-bottom:1px solid rgba(201,168,76,.2);padding:18px 24px;position:relative;overflow:hidden;flex-shrink:0; }
+  .gorgen-header::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--guld),transparent); }
+  .gorgen-avatar { width:48px;height:48px;border-radius:50%;border:1px solid var(--guld);background:#1a0e04;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;box-shadow:0 0 16px rgba(201,168,76,.2);animation:pulse 3s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 16px rgba(201,168,76,.2)} 50%{box-shadow:0 0 28px rgba(201,168,76,.45)} }
+  .gorgen-name { font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--guld);margin-bottom:4px;letter-spacing:1px; }
+  .gorgen-status { font-size:.78rem;color:rgba(245,234,216,.4);display:flex;align-items:center;gap:6px; }
+  .status-dot { width:7px;height:7px;border-radius:50%;background:#7ab648;box-shadow:0 0 6px #7ab648;animation:blink 2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+  #messages { overflow-y:auto;padding:24px;background:var(--yta2);border-left:1px solid var(--kant);border-right:1px solid var(--kant);display:flex;flex-direction:column;gap:16px;min-height:380px;max-height:460px;scrollbar-width:thin;scrollbar-color:var(--kant) transparent; }
+  #messages::-webkit-scrollbar { width:5px; }
+  #messages::-webkit-scrollbar-thumb { background:var(--kant); }
   .msg { display:flex;gap:10px;align-items:flex-end;animation:msgIn .25s ease; }
   @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   .msg.user { flex-direction:row-reverse; }
   .msg-avatar { width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;border:1px solid var(--kant); }
-  .msg.bot .msg-avatar { background:#071828;border-color:var(--cyan);box-shadow:0 0 10px rgba(0,245,255,.25); }
-  .msg.user .msg-avatar { background:#0d1f35;border-color:rgba(200,240,255,.2); }
-  .msg-bubble { max-width:75%;padding:12px 16px;border-radius:12px;font-size:.9rem;line-height:1.7; }
-  .msg.bot .msg-bubble { background:var(--yta);border:1px solid rgba(0,245,255,.18);color:var(--text);border-radius:4px 12px 12px 12px; }
-  .msg.user .msg-bubble { background:rgba(0,245,255,.12);border:1px solid rgba(0,245,255,.3);color:#fff;border-radius:12px 4px 12px 12px; }
+  .msg.bot .msg-avatar { background:#1a0e04;border-color:var(--guld); }
+  .msg.user .msg-avatar { background:var(--yta);border-color:var(--kant); }
+  .msg-bubble { max-width:75%;padding:12px 18px;font-size:.9rem;line-height:1.75; }
+  .msg.bot .msg-bubble { background:var(--yta);border:1px solid var(--kant);color:var(--text);border-radius:2px 12px 12px 12px; }
+  .msg.user .msg-bubble { background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--creme);border-radius:12px 2px 12px 12px; }
   .typing { display:flex;align-items:center;gap:5px;padding:14px 16px; }
-  .typing span { width:7px;height:7px;border-radius:50%;background:var(--cyan);opacity:.4;animation:ty 1.2s ease-in-out infinite; }
+  .typing span { width:6px;height:6px;border-radius:50%;background:var(--guld);opacity:.3;animation:ty 1.2s ease-in-out infinite; }
   .typing span:nth-child(2){animation-delay:.2s} .typing span:nth-child(3){animation-delay:.4s}
-  @keyframes ty { 0%,100%{opacity:.4;transform:translateY(0)} 50%{opacity:1;transform:translateY(-5px)} }
-  .suggestions { padding:10px 16px;background:var(--yta);border-left:1px solid var(--kant);border-right:1px solid var(--kant);display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;border-top:1px solid rgba(0,245,255,.08); }
-  .sug-btn { font-family:'Press Start 2P',monospace;font-size:.38rem;padding:6px 9px;background:transparent;color:rgba(200,240,255,.5);border:1px solid var(--kant);border-radius:4px;cursor:pointer;transition:.15s;white-space:nowrap; }
-  .sug-btn:hover { color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.06); }
-  .input-row { display:flex;background:var(--yta);border:1px solid var(--kant);border-top:1px solid rgba(0,245,255,.2);border-radius:0 0 8px 8px;overflow:hidden;flex-shrink:0;margin-bottom:24px; }
-  #userInput { flex:1;padding:16px 20px;background:transparent;border:none;color:#fff;font-family:'Nunito',sans-serif;font-size:.95rem;outline:none; }
-  #userInput::placeholder { color:rgba(200,240,255,.3); }
-  #sendBtn { font-family:'Press Start 2P',monospace;font-size:.52rem;padding:0 20px;background:var(--cyan);color:#050b14;border:none;cursor:pointer;transition:.15s;flex-shrink:0; }
-  #sendBtn:hover { background:#33f7ff; }
-  #sendBtn:disabled { background:var(--kant);color:rgba(200,240,255,.3);cursor:default; }
-  footer { background:#030810;border-top:1px solid var(--kant);text-align:center;padding:20px;font-family:'Press Start 2P',monospace;font-size:.42rem;color:rgba(200,240,255,.2);line-height:2.2; }
-  footer b { color:var(--cyan); }
-  @media(max-width:520px){ nav a{font-size:.35rem;padding:5px 6px;} .logo{font-size:.55rem;} .msg-bubble{max-width:85%;} }
+  @keyframes ty { 0%,100%{opacity:.3;transform:translateY(0)} 50%{opacity:.9;transform:translateY(-4px)} }
+  .suggestions { padding:10px 18px;background:var(--yta);border-left:1px solid var(--kant);border-right:1px solid var(--kant);display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;border-top:1px solid rgba(201,168,76,.08); }
+  .sug-btn { font-family:'Press Start 2P',monospace;font-size:.36rem;padding:6px 10px;background:transparent;color:rgba(245,234,216,.4);border:1px solid var(--kant);cursor:pointer;transition:.2s;white-space:nowrap; }
+  .sug-btn:hover { color:var(--guld);border-color:var(--guld);background:rgba(201,168,76,.06); }
+  .input-row { display:flex;background:var(--yta);border:1px solid var(--kant);border-top:1px solid rgba(201,168,76,.15);overflow:hidden;flex-shrink:0;margin-bottom:28px; }
+  #userInput { flex:1;padding:16px 20px;background:transparent;border:none;color:var(--creme);font-family:'Nunito',sans-serif;font-size:.93rem;outline:none; }
+  #userInput::placeholder { color:rgba(245,234,216,.25); }
+  #sendBtn { font-family:'Press Start 2P',monospace;font-size:.48rem;padding:0 22px;background:var(--guld);color:var(--mork);border:none;cursor:pointer;transition:.2s;flex-shrink:0;letter-spacing:.5px; }
+  #sendBtn:hover { background:var(--guld2); }
+  #sendBtn:disabled { background:var(--kant);color:rgba(245,234,216,.3);cursor:default; }
+  footer { background:#100a04;border-top:1px solid var(--kant);text-align:center;padding:24px;font-family:'Press Start 2P',monospace;font-size:.4rem;color:rgba(245,234,216,.18);line-height:2.4; }
+  footer b { color:var(--guld); }
+  @media(max-width:600px){ nav a{font-size:.32rem;padding:5px 7px;} .logo{font-size:.55rem;} nav{padding:0 16px;} .chat-wrap{padding:20px 16px 0;} .msg-bubble{max-width:85%;} }
 </style>
 </head>
 <body>
-
 <nav>
-  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html" class="logo">🐦 FLAPPY UNIVERSE</a>
   <a href="index.html">HEM</a>
   <a href="spelet.html">SPELA</a>
   <a href="skaparen.html">SKAPAREN</a>
   <a href="historia.html">HISTORIA</a>
   <a href="gorgen.html" class="on">GÖRGEN 🤖</a>
 </nav>
-
 <div class="page">
   <div class="hero-band">
-    <h1>🤖 CHATTA MED GÖRGEN</h1>
+    <div class="sec-label">AI-GUIDE</div>
+    <h1>CHATTA MED GÖRGEN</h1>
     <p>Riktig AI – svarar på vad som helst om Flappy Bird</p>
   </div>
   <div class="chat-wrap">
@@ -96,15 +96,12 @@
     </div>
   </div>
 </div>
-
 <footer>
-  <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
-  <div>Görgen drivs av <b>CLAUDE AI</b> via Cloudflare &nbsp;·&nbsp; Originalspelet av <b>DONG NGUYEN</b> 2013</div>
+  <div>FLAPPY UNIVERSE &nbsp;·&nbsp; SKOLPROJEKT</div>
+  <div>Görgen drivs av <b>CLAUDE AI</b> &nbsp;·&nbsp; Originalspelet av <b>DONG NGUYEN</b> 2013</div>
 </footer>
-
 <script>
 const WORKER_URL = 'https://gorgen-api.ebbbac514.workers.dev';
-
 let history = [];
 
 async function send() {
@@ -112,49 +109,31 @@ async function send() {
   const btn = document.getElementById('sendBtn');
   const txt = inp.value.trim();
   if (!txt) return;
-
-  inp.value = '';
-  btn.disabled = true;
+  inp.value = ''; btn.disabled = true;
   addMsg('user', txt);
-  history.push({ role: 'user', content: txt });
+  history.push({ role:'user', content:txt });
   showTyping();
-
   try {
-    const res = await fetch(WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history })
-    });
-
+    const res = await fetch(WORKER_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({messages:history}) });
     const data = await res.json();
     hideTyping();
-
     const reply = data?.content?.[0]?.text || 'Ursäkta, något gick fel! Försök igen. 🤖';
-    history.push({ role: 'assistant', content: reply });
+    history.push({ role:'assistant', content:reply });
     addMsg('bot', reply);
-
-  } catch (err) {
+  } catch(err) {
     hideTyping();
     addMsg('bot', 'Kunde inte nå servern just nu. Försök igen! 🤖');
   }
-
-  btn.disabled = false;
-  inp.focus();
+  btn.disabled = false; inp.focus();
 }
 
-function ask(txt) {
-  document.getElementById('userInput').value = txt;
-  send();
-}
+function ask(txt) { document.getElementById('userInput').value=txt; send(); }
 
 function addMsg(role, text) {
   const wrap = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = `msg ${role}`;
-  div.innerHTML = `
-    <div class="msg-avatar">${role==='bot'?'🤖':'👤'}</div>
-    <div class="msg-bubble">${text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>
-  `;
+  div.innerHTML = `<div class="msg-avatar">${role==='bot'?'🤖':'👤'}</div><div class="msg-bubble">${text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop = wrap.scrollHeight;
 }
@@ -162,23 +141,16 @@ function addMsg(role, text) {
 function showTyping() {
   const wrap = document.getElementById('messages');
   const div = document.createElement('div');
-  div.className = 'msg bot'; div.id = 'typing';
-  div.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
-  wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
+  div.className='msg bot'; div.id='typing';
+  div.innerHTML=`<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
 }
+function hideTyping() { const t=document.getElementById('typing'); if(t)t.remove(); }
 
-function hideTyping() {
-  const t = document.getElementById('typing');
-  if (t) t.remove();
-}
-
-document.getElementById('userInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') { e.preventDefault(); send(); }
-});
+document.getElementById('userInput').addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();send();} });
 
 setTimeout(() => {
-  addMsg('bot', 'Hej! Jag är Görgen 🤖 – en riktig AI som kan svara på vad som helst om Flappy Bird!\n\nFråga mig om historien, skaparen Dong Nguyen, hur spelet fungerar, eller hur du hittar på hemsidan. Vad vill du veta?');
+  addMsg('bot', 'Välkommen till Flappy Universe! Jag är Görgen 🤖 – din AI-guide.\n\nFråga mig om historien, skaparen Dong Nguyen, hur spelet fungerar, eller hur du hittar på hemsidan. Vad vill du veta?');
 }, 300);
 </script>
 </body>
