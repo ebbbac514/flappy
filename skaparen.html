@@ -9,10 +9,10 @@
   :root { --cyan:#00f5ff; --mork:#050b14; --yta:#0a1628; --yta2:#0d1f35; --kant:#0e2a40; --text:#c8f0ff; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Nunito',sans-serif; background:var(--mork); color:var(--text); min-height:100vh; overflow-x:hidden; }
-  nav { position:fixed;top:0;left:0;right:0;z-index:100; background:rgba(5,11,20,.97); border-bottom:2px solid var(--cyan); box-shadow:0 0 18px rgba(0,245,255,.18); display:flex;align-items:center;padding:0 24px;height:58px;gap:6px; }
-  .logo { font-family:'Press Start 2P',monospace;font-size:.7rem;color:var(--cyan);text-decoration:none;margin-right:auto;text-shadow:0 0 10px var(--cyan); }
-  nav a { font-family:'Press Start 2P',monospace;font-size:.46rem;color:#5599bb;text-decoration:none;padding:7px 11px;border:2px solid transparent;border-radius:4px;transition:.15s; }
-  nav a:hover, nav a.on { color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.07);box-shadow:0 0 10px rgba(0,245,255,.15); }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,11,20,.97);border-bottom:2px solid var(--cyan);box-shadow:0 0 18px rgba(0,245,255,.18);display:flex;align-items:center;padding:0 16px;height:58px;gap:4px; }
+  .logo { font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--cyan);text-decoration:none;margin-right:auto;text-shadow:0 0 10px var(--cyan);white-space:nowrap; }
+  nav a { font-family:'Press Start 2P',monospace;font-size:.4rem;color:#5599bb;text-decoration:none;padding:6px 9px;border:2px solid transparent;border-radius:4px;transition:.15s;white-space:nowrap; }
+  nav a:hover,nav a.on { color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.07);box-shadow:0 0 10px rgba(0,245,255,.15); }
   .page { padding-top:58px; }
   .hero-band { background:radial-gradient(ellipse at 50% 0%,#071e38 0%,#050b14 80%);padding:64px 24px 44px;text-align:center;position:relative;overflow:hidden; }
   .hero-band::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.03) 1px,transparent 1px);background-size:36px 36px; }
@@ -46,12 +46,12 @@
   .fact p { font-size:.85rem;color:rgba(200,240,255,.65);line-height:1.7; }
   .quote { background:var(--yta);border:1px solid rgba(0,245,255,.2);border-radius:6px;padding:30px;text-align:center;margin-bottom:44px;position:relative;overflow:hidden; }
   .quote::before,.quote::after { content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .quote::before { top:0; } .quote::after { bottom:0; }
+  .quote::before{top:0;}.quote::after{bottom:0;}
   .quote blockquote { font-size:1rem;font-style:italic;color:rgba(200,240,255,.82);line-height:1.85;margin-bottom:14px; }
   .quote cite { font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(200,240,255,.3); }
   footer { background:#030810;border-top:1px solid var(--kant);text-align:center;padding:26px;font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(200,240,255,.25);line-height:2.2; }
   footer b { color:var(--cyan);text-shadow:0 0 8px var(--cyan); }
-  @media(max-width:520px){ .profile{flex-direction:column;align-items:center;} nav a{font-size:.4rem;padding:6px 8px;} }
+  @media(max-width:600px){ .profile{flex-direction:column;align-items:center;} nav a{font-size:.35rem;padding:5px 6px;} .logo{font-size:.55rem;} }
 </style>
 </head>
 <body>
@@ -90,41 +90,4 @@
     </div>
     <h2 class="sec-title">FAKTA OM NGUYEN</h2>
     <div class="facts">
-      <div class="fact"><div class="fact-ico">🏠</div><div><h4>UPPVUXEN I HANOI</h4><p>Nguyen växte upp i Vietnams huvudstad och lärde sig programmera tidigt med ett brinnande intresse för klassiska arkadspel.</p></div></div>
-      <div class="fact"><div class="fact-ico">⏱️</div><div><h4>SKAPADE SPELET PÅ 2–3 DAGAR</h4><p>Konceptet byggdes på några dagar. Han ville ha ett spel att spela med en hand – till exempel i tunnelbanan.</p></div></div>
-      <div class="fact"><div class="fact-ico">📱</div><div><h4>INSPIRERAD AV SUPER MARIO</h4><p>Rörens design kom direkt från Super Mario Bros. Nguyen ville ha ett igenkännbart hinder som alla förstod omedelbart.</p></div></div>
-      <div class="fact"><div class="fact-ico">💔</div><div><h4>ÅNGRADE SIG ÖVER BEROENDET</h4><p>Han fick ständiga meddelanden om att folk missade skolan eller jobbet. Skulden var en av orsakerna till att han tog bort spelet.</p></div></div>
-      <div class="fact"><div class="fact-ico">🎮</div><div><h4>FORTSÄTTER SKAPA SPEL</h4><p>Efter Flappy Bird kom Swing Copters (2014) och Ninja Spinki Challenges (2016) – men inget nådde samma popularitet.</p></div></div>
-    </div>
-    <div class="quote">
-      <blockquote>"Flappy Bird was designed to play in a few minutes when you are relaxed. But it happened to become an addictive product. I feel bad about this."</blockquote>
-      <cite>– DONG NGUYEN · ROLLING STONE · 2014</cite>
-    </div>
-  </div>
-  <footer>
-    <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
-    <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
-  </footer>
-</div>
-<script>
-const c=document.getElementById('pc'),x=c.getContext('2d');
-const p=(px,py,w,h,col)=>{x.fillStyle=col;x.fillRect(px,py,w,h);};
-p(0,0,75,75,'#071828');
-p(22,11,30,9,'#001a0a');p(19,17,37,7,'#001a0a');
-p(15,21,7,15,'#001a0a');p(53,21,7,15,'#001a0a');
-p(19,19,37,30,'#006a7a');p(17,27,4,14,'#006a7a');p(54,27,4,14,'#006a7a');
-p(24,29,7,5,'#cff');p(44,29,7,5,'#cff');
-p(26,30,4,3,'#003a44');p(46,30,4,3,'#003a44');
-p(27,31,2,2,'#000');p(47,31,2,2,'#000');
-p(31,29,2,2,'#00f5ff');p(51,29,2,2,'#00f5ff');
-p(22,25,11,3,'#001a0a');p(42,25,11,3,'#001a0a');
-p(34,37,7,4,'#005566');p(32,41,4,3,'#005566');p(40,41,4,3,'#005566');
-p(26,47,23,3,'#004455');p(24,45,4,4,'#004455');p(47,45,4,4,'#004455');
-p(28,49,19,3,'#00a8c0');
-p(15,29,6,7,'#006a7a');p(54,29,6,7,'#006a7a');
-p(26,50,23,9,'#006a7a');
-p(8,59,59,17,'#003a5a');p(26,50,23,11,'#003a5a');
-p(22,57,11,6,'#00f5ff');p(42,57,11,6,'#00f5ff');
-</script>
-</body>
-</html>
+      <div class="fact"><div class="fact-ico">🏠</div><div><h4>UPPVUXEN I HANOI</h4><p>Nguyen växte upp i Vi
