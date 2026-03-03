@@ -29,14 +29,12 @@
   nav a { font-family:'Press Start 2P',monospace; font-size:.46rem; color:#5599bb; text-decoration:none; padding:7px 11px; border:2px solid transparent; border-radius:4px; transition:.15s; }
   nav a:hover, nav a.on { color:var(--cyan); border-color:var(--cyan); background:rgba(0,245,255,.07); box-shadow:0 0 10px rgba(0,245,255,.15); }
 
-  /* HERO */
   .hero {
     min-height:100vh; padding-top:58px;
     background:radial-gradient(ellipse at 50% 0%, #0a2a4a 0%, #050b14 70%);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     position:relative; overflow:hidden;
   }
-  /* Grid lines */
   .hero::before {
     content:''; position:absolute; inset:0;
     background-image:
@@ -46,8 +44,6 @@
     animation:gridMove 8s linear infinite;
   }
   @keyframes gridMove { from{background-position:0 0} to{background-position:0 40px} }
-
-  /* Scanlines */
   .hero::after {
     content:''; position:absolute; inset:0; pointer-events:none;
     background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px);
@@ -72,7 +68,6 @@
   .btn-s { background:var(--cyan); color:#050b14; border-color:var(--cyan); box-shadow:0 0 18px rgba(0,245,255,.4); }
   .btn-s:hover { background:#33f7ff; box-shadow:0 0 28px rgba(0,245,255,.7); }
 
-  /* CARDS */
   .cards-sec { background:var(--mork); padding:72px 24px; position:relative; }
   .cards-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
   .sec-title { font-family:'Press Start 2P',monospace; font-size:.9rem; color:var(--cyan); text-align:center; margin-bottom:44px; text-shadow:0 0 14px var(--cyan); }
@@ -90,7 +85,6 @@
   .card h3 { font-family:'Press Start 2P',monospace; font-size:.58rem; color:var(--cyan); margin-bottom:10px; line-height:1.7; text-shadow:0 0 8px rgba(0,245,255,.4); }
   .card p { font-size:.84rem; color:rgba(200,240,255,.6); line-height:1.65; }
 
-  /* FACTS */
   .facts-sec { background:var(--yta); padding:72px 24px; position:relative; }
   .facts-sec::before, .facts-sec::after { content:''; position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
   .facts-sec::before { top:0; }
@@ -111,6 +105,22 @@
     transition:.15s;
   }
   .fact-btn:hover { background:rgba(0,245,255,.1); box-shadow:0 0 22px rgba(0,245,255,.45); }
+
+  .links-sec { background:var(--mork); padding:72px 24px; position:relative; }
+  .links-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+  .link-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:900px; margin:0 auto; }
+  .link-card {
+    display:block; background:var(--yta); border:1px solid var(--kant);
+    border-radius:6px; padding:26px 20px; text-decoration:none; color:var(--text);
+    transition:.25s; position:relative; overflow:hidden; text-align:center;
+  }
+  .link-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:0; transition:.25s; }
+  .link-card:hover { border-color:rgba(0,245,255,.4); transform:translateY(-4px); background:var(--yta2); box-shadow:0 0 28px rgba(0,245,255,.12); }
+  .link-card:hover::before { opacity:1; }
+  .link-icon { font-size:2.2rem; margin-bottom:12px; display:block; filter:drop-shadow(0 0 8px rgba(0,245,255,.5)); }
+  .link-title { font-family:'Press Start 2P',monospace; font-size:.56rem; color:var(--cyan); margin-bottom:8px; text-shadow:0 0 8px var(--cyan); line-height:1.7; }
+  .link-desc { font-size:.82rem; color:rgba(200,240,255,.55); line-height:1.6; margin-bottom:10px; }
+  .link-url { font-family:'Press Start 2P',monospace; font-size:.42rem; color:rgba(200,240,255,.22); }
 
   footer {
     background:#030810; border-top:1px solid var(--kant);
@@ -169,6 +179,34 @@
     <h2 class="sec-title">// VISSTE DU ATT...</h2>
     <div class="fact-text" id="factText">Laddar faktum...</div>
     <button class="fact-btn" onclick="newFact()">⚡ NYTT FAKTUM</button>
+  </div>
+</section>
+
+<section class="links-sec">
+  <h2 class="sec-title">// EXTERNA LÄNKAR</h2>
+  <div class="link-cards">
+
+    <a class="link-card" href="https://flappybird.io" target="_blank" rel="noopener">
+      <span class="link-icon">🎮</span>
+      <div class="link-title">SPELA FLAPPY BIRD</div>
+      <div class="link-desc">Spela originalspelet direkt i webbläsaren på flappybird.io</div>
+      <div class="link-url">flappybird.io ↗</div>
+    </a>
+
+    <a class="link-card" href="https://x.com/dongatory" target="_blank" rel="noopener">
+      <span class="link-icon">👨‍💻</span>
+      <div class="link-title">DONG NGUYENS TWITTER</div>
+      <div class="link-desc">Följ skaparen Dong Nguyen på X / Twitter</div>
+      <div class="link-url">x.com/dongatory ↗</div>
+    </a>
+
+    <a class="link-card" href="https://en.wikipedia.org/wiki/Flappy_Bird" target="_blank" rel="noopener">
+      <span class="link-icon">📖</span>
+      <div class="link-title">WIKIPEDIA</div>
+      <div class="link-desc">Läs hela Flappy Birds Wikipedia-artikel på engelska</div>
+      <div class="link-url">wikipedia.org ↗</div>
+    </a>
+
   </div>
 </section>
 
