@@ -3,101 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flappy Bird – Hemsida</title>
+<title>Flappy Universe – Hemsida</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cyan: #00f5ff;
-    --mork: #050b14;
-    --yta: #0a1628;
-    --yta2: #0d1f35;
-    --kant: #0e2a40;
-    --text: #c8f0ff;
+    --guld: #c9a84c;
+    --guld2: #e8c97a;
+    --mork: #1a1008;
+    --yta: #241808;
+    --yta2: #2e2010;
+    --kant: #4a3418;
+    --text: #f5ead8;
+    --creme: #f9f3e8;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Nunito',sans-serif; background:var(--mork); color:var(--text); min-height:100vh; overflow-x:hidden; }
 
   nav {
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(5,11,20,0.97);
-    border-bottom:2px solid var(--cyan);
-    box-shadow:0 0 18px rgba(0,245,255,0.18);
-    display:flex; align-items:center; padding:0 16px; height:58px; gap:4px;
+    background:rgba(26,16,8,0.98);
+    border-bottom:1px solid var(--guld);
+    box-shadow:0 2px 24px rgba(201,168,76,0.12);
+    display:flex; align-items:center; padding:0 32px; height:62px; gap:4px;
   }
-  .logo { font-family:'Press Start 2P',monospace; font-size:.65rem; color:var(--cyan); text-decoration:none; margin-right:auto; text-shadow:0 0 10px var(--cyan); white-space:nowrap; }
-  nav a { font-family:'Press Start 2P',monospace; font-size:.4rem; color:#5599bb; text-decoration:none; padding:6px 9px; border:2px solid transparent; border-radius:4px; transition:.15s; white-space:nowrap; }
-  nav a:hover, nav a.on { color:var(--cyan); border-color:var(--cyan); background:rgba(0,245,255,.07); box-shadow:0 0 10px rgba(0,245,255,.15); }
+  .logo { font-family:'Press Start 2P',monospace; font-size:.65rem; color:var(--guld); text-decoration:none; margin-right:auto; letter-spacing:1px; }
+  nav a { font-family:'Press Start 2P',monospace; font-size:.38rem; color:rgba(245,234,216,.5); text-decoration:none; padding:7px 11px; border:1px solid transparent; border-radius:2px; transition:.2s; white-space:nowrap; letter-spacing:.5px; }
+  nav a:hover, nav a.on { color:var(--guld); border-color:var(--guld); background:rgba(201,168,76,.07); }
 
+  /* HERO */
   .hero {
-    min-height:100vh; padding-top:58px;
-    background:radial-gradient(ellipse at 50% 0%, #0a2a4a 0%, #050b14 70%);
+    min-height:100vh; padding-top:62px;
+    background:radial-gradient(ellipse at 50% 30%, #2e1e08 0%, #1a1008 65%);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     position:relative; overflow:hidden;
   }
   .hero::before {
     content:''; position:absolute; inset:0;
-    background-image: linear-gradient(rgba(0,245,255,.04) 1px,transparent 1px), linear-gradient(90deg,rgba(0,245,255,.04) 1px,transparent 1px);
-    background-size:40px 40px; animation:gridMove 8s linear infinite;
+    background-image:
+      linear-gradient(rgba(201,168,76,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,.035) 1px, transparent 1px);
+    background-size:60px 60px;
   }
-  @keyframes gridMove { from{background-position:0 0} to{background-position:0 40px} }
-  .hero::after { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px); }
+  .hero::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--guld), transparent);
+  }
 
-  .bird-anim { font-size:5rem; animation:bob .85s ease-in-out infinite alternate; cursor:pointer; z-index:2; filter:drop-shadow(0 0 20px rgba(0,245,255,.6)); }
-  @keyframes bob { from{transform:translateY(0) rotate(-5deg)} to{transform:translateY(-16px) rotate(6deg)} }
+  .bird-anim { font-size:4.5rem; animation:bob .9s ease-in-out infinite alternate; z-index:2; filter:drop-shadow(0 4px 16px rgba(201,168,76,.3)); }
+  @keyframes bob { from{transform:translateY(0) rotate(-4deg)} to{transform:translateY(-14px) rotate(5deg)} }
 
-  .hero-title { font-family:'Press Start 2P',monospace; font-size:clamp(1.2rem,5vw,2.4rem); text-align:center; z-index:2; padding:0 20px; color:#fff; text-shadow:0 0 20px var(--cyan),0 0 40px rgba(0,245,255,.4),4px 4px 0 rgba(0,0,0,.5); margin:12px 0 8px; line-height:1.5; }
-  .hero-title span { color:var(--cyan); }
-  .hero-sub { z-index:2; font-size:1rem; color:rgba(200,240,255,.7); text-align:center; max-width:460px; padding:0 20px; }
-  .btns { display:flex; gap:14px; margin-top:28px; z-index:2; flex-wrap:wrap; justify-content:center; padding:0 20px; }
-  .btn { font-family:'Press Start 2P',monospace; font-size:.62rem; padding:13px 22px; border-radius:4px; border:2px solid; cursor:pointer; text-decoration:none; display:inline-block; transition:.15s; }
-  .btn:active { transform:translateY(2px); }
-  .btn-c { background:transparent; color:var(--cyan); border-color:var(--cyan); box-shadow:0 0 14px rgba(0,245,255,.3),inset 0 0 14px rgba(0,245,255,.05); }
-  .btn-c:hover { background:rgba(0,245,255,.1); box-shadow:0 0 24px rgba(0,245,255,.5); }
-  .btn-s { background:var(--cyan); color:#050b14; border-color:var(--cyan); box-shadow:0 0 18px rgba(0,245,255,.4); }
-  .btn-s:hover { background:#33f7ff; box-shadow:0 0 28px rgba(0,245,255,.7); }
+  .hero-eyebrow { font-family:'Press Start 2P',monospace; font-size:.5rem; color:var(--guld); letter-spacing:4px; z-index:2; margin:20px 0 12px; opacity:.7; }
+  .hero-title { font-family:'Press Start 2P',monospace; font-size:clamp(1rem,4vw,2rem); text-align:center; z-index:2; padding:0 20px; color:var(--creme); letter-spacing:2px; line-height:1.6; margin-bottom:10px; }
+  .hero-title span { color:var(--guld); }
+  .hero-divider { width:120px; height:1px; background:linear-gradient(90deg,transparent,var(--guld),transparent); z-index:2; margin:16px 0; }
+  .hero-sub { z-index:2; font-size:.95rem; color:rgba(245,234,216,.6); text-align:center; max-width:440px; padding:0 20px; line-height:1.8; }
+  .btns { display:flex; gap:16px; margin-top:32px; z-index:2; flex-wrap:wrap; justify-content:center; padding:0 20px; }
+  .btn { font-family:'Press Start 2P',monospace; font-size:.55rem; padding:14px 24px; border-radius:2px; cursor:pointer; text-decoration:none; display:inline-block; transition:.2s; letter-spacing:1px; }
+  .btn-fill { background:var(--guld); color:var(--mork); border:1px solid var(--guld); }
+  .btn-fill:hover { background:var(--guld2); }
+  .btn-out { background:transparent; color:var(--guld); border:1px solid var(--guld); }
+  .btn-out:hover { background:rgba(201,168,76,.1); }
 
-  .cards-sec { background:var(--mork); padding:72px 24px; position:relative; }
-  .cards-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .sec-title { font-family:'Press Start 2P',monospace; font-size:.9rem; color:var(--cyan); text-align:center; margin-bottom:44px; text-shadow:0 0 14px var(--cyan); }
-  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; max-width:1100px; margin:0 auto; }
-  .card { background:var(--yta); border:1px solid var(--kant); border-radius:6px; padding:26px 22px; text-align:center; transition:.25s; text-decoration:none; color:inherit; display:block; position:relative; overflow:hidden; }
-  .card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:0; transition:.25s; }
-  .card:hover { border-color:rgba(0,245,255,.4); transform:translateY(-5px); background:var(--yta2); box-shadow:0 0 30px rgba(0,245,255,.12),0 14px 40px rgba(0,0,0,.4); }
-  .card:hover::before { opacity:1; }
-  .card-icon { font-size:2.4rem; margin-bottom:14px; display:block; filter:drop-shadow(0 0 8px rgba(0,245,255,.4)); }
-  .card h3 { font-family:'Press Start 2P',monospace; font-size:.58rem; color:var(--cyan); margin-bottom:10px; line-height:1.7; text-shadow:0 0 8px rgba(0,245,255,.4); }
-  .card p { font-size:.84rem; color:rgba(200,240,255,.6); line-height:1.65; }
+  /* CARDS */
+  .cards-sec { background:var(--mork); padding:80px 32px; position:relative; }
+  .cards-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--guld),transparent); }
+  .sec-label { font-family:'Press Start 2P',monospace; font-size:.42rem; color:var(--guld); text-align:center; letter-spacing:4px; margin-bottom:10px; opacity:.6; }
+  .sec-title { font-family:'Press Start 2P',monospace; font-size:.85rem; color:var(--creme); text-align:center; margin-bottom:52px; letter-spacing:1px; line-height:1.8; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1px; max-width:1100px; margin:0 auto; background:var(--kant); border:1px solid var(--kant); }
+  .card { background:var(--yta); padding:32px 24px; text-align:center; transition:.25s; text-decoration:none; color:inherit; display:block; position:relative; }
+  .card:hover { background:var(--yta2); }
+  .card::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:0; height:1px; background:var(--guld); transition:.3s; }
+  .card:hover::after { width:60%; }
+  .card-icon { font-size:2.2rem; margin-bottom:16px; display:block; }
+  .card h3 { font-family:'Press Start 2P',monospace; font-size:.52rem; color:var(--guld); margin-bottom:12px; line-height:1.8; letter-spacing:.5px; }
+  .card p { font-size:.82rem; color:rgba(245,234,216,.55); line-height:1.7; }
 
-  .facts-sec { background:var(--yta); padding:72px 24px; position:relative; }
-  .facts-sec::before,.facts-sec::after { content:''; position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+  /* FACTS */
+  .facts-sec { background:var(--yta); padding:80px 32px; position:relative; }
+  .facts-sec::before,.facts-sec::after { content:''; position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--guld),transparent); }
   .facts-sec::before { top:0; } .facts-sec::after { bottom:0; }
-  .fact-box { max-width:640px; margin:0 auto; text-align:center; }
-  .fact-text { font-size:1rem; line-height:1.8; color:rgba(200,240,255,.88); background:var(--yta2); border:1px solid rgba(0,245,255,.2); border-radius:6px; padding:28px; min-height:100px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; transition:.3s; }
-  .fact-btn { font-family:'Press Start 2P',monospace; font-size:.58rem; padding:12px 22px; background:transparent; color:var(--cyan); border:2px solid var(--cyan); border-radius:4px; cursor:pointer; box-shadow:0 0 14px rgba(0,245,255,.25); transition:.15s; }
-  .fact-btn:hover { background:rgba(0,245,255,.1); box-shadow:0 0 22px rgba(0,245,255,.45); }
+  .fact-box { max-width:620px; margin:0 auto; text-align:center; }
+  .fact-text { font-size:.95rem; line-height:1.9; color:rgba(245,234,216,.85); background:var(--yta2); border:1px solid var(--kant); padding:32px; min-height:110px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; transition:.3s; }
+  .fact-btn { font-family:'Press Start 2P',monospace; font-size:.52rem; padding:13px 24px; background:transparent; color:var(--guld); border:1px solid var(--guld); cursor:pointer; transition:.2s; letter-spacing:1px; }
+  .fact-btn:hover { background:rgba(201,168,76,.1); }
 
-  .links-sec { background:var(--mork); padding:72px 24px; position:relative; }
-  .links-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .link-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:900px; margin:0 auto; }
-  .link-card { display:block; background:var(--yta); border:1px solid var(--kant); border-radius:6px; padding:26px 20px; text-decoration:none; color:var(--text); transition:.25s; position:relative; overflow:hidden; text-align:center; }
-  .link-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:0; transition:.25s; }
-  .link-card:hover { border-color:rgba(0,245,255,.4); transform:translateY(-4px); background:var(--yta2); box-shadow:0 0 28px rgba(0,245,255,.12); }
-  .link-card:hover::before { opacity:1; }
-  .link-icon { font-size:2.2rem; margin-bottom:12px; display:block; filter:drop-shadow(0 0 8px rgba(0,245,255,.5)); }
-  .link-title { font-family:'Press Start 2P',monospace; font-size:.56rem; color:var(--cyan); margin-bottom:8px; text-shadow:0 0 8px var(--cyan); line-height:1.7; }
-  .link-desc { font-size:.82rem; color:rgba(200,240,255,.55); line-height:1.6; margin-bottom:10px; }
-  .link-url { font-family:'Press Start 2P',monospace; font-size:.42rem; color:rgba(200,240,255,.22); }
+  /* LINKS */
+  .links-sec { background:var(--mork); padding:80px 32px; position:relative; }
+  .links-sec::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--guld),transparent); }
+  .link-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1px; max-width:900px; margin:0 auto; background:var(--kant); border:1px solid var(--kant); }
+  .link-card { display:block; background:var(--yta); padding:28px 22px; text-decoration:none; color:var(--text); transition:.2s; text-align:center; position:relative; }
+  .link-card:hover { background:var(--yta2); }
+  .link-card::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:0; height:1px; background:var(--guld); transition:.3s; }
+  .link-card:hover::after { width:60%; }
+  .link-icon { font-size:2rem; margin-bottom:12px; display:block; }
+  .link-title { font-family:'Press Start 2P',monospace; font-size:.5rem; color:var(--guld); margin-bottom:8px; line-height:1.8; letter-spacing:.5px; }
+  .link-desc { font-size:.8rem; color:rgba(245,234,216,.5); line-height:1.65; margin-bottom:10px; }
+  .link-url { font-family:'Press Start 2P',monospace; font-size:.38rem; color:rgba(245,234,216,.2); }
 
-  footer { background:#030810; border-top:1px solid var(--kant); text-align:center; padding:26px; font-family:'Press Start 2P',monospace; font-size:.45rem; color:rgba(200,240,255,.25); line-height:2.2; }
-  footer b { color:var(--cyan); text-shadow:0 0 8px var(--cyan); }
+  footer { background:#100a04; border-top:1px solid var(--kant); text-align:center; padding:28px; font-family:'Press Start 2P',monospace; font-size:.42rem; color:rgba(245,234,216,.2); line-height:2.4; }
+  footer b { color:var(--guld); }
 
-  @media(max-width:600px){ nav a{font-size:.35rem;padding:5px 6px;} .logo{font-size:.55rem;} }
+  @media(max-width:600px){ nav a{font-size:.32rem;padding:5px 7px;} .logo{font-size:.55rem;} nav{padding:0 16px;} }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html" class="logo">🐦 FLAPPY UNIVERSE</a>
   <a href="index.html" class="on">HEM</a>
   <a href="spelet.html">SPELA</a>
   <a href="skaparen.html">SKAPAREN</a>
@@ -107,74 +119,79 @@
 
 <section class="hero">
   <div class="bird-anim">🐦</div>
-  <h1 class="hero-title">VÄLKOMMEN TILL<br><span>FLAPPY BIRD</span></h1>
+  <div class="hero-eyebrow">— VÄLKOMMEN —</div>
+  <h1 class="hero-title">VÄLKOMMEN TILL<br><span>FLAPPY UNIVERSE</span></h1>
+  <div class="hero-divider"></div>
   <p class="hero-sub">Utforska spelet som tog världen med storm 2013. Spela, lär dig historien och möt skaparen bakom fenomenet.</p>
   <div class="btns">
-    <a href="spelet.html" class="btn btn-s">▶ SPELA NU</a>
-    <a href="historia.html" class="btn btn-c">📖 HISTORIEN</a>
+    <a href="spelet.html" class="btn btn-fill">▶ SPELA NU</a>
+    <a href="historia.html" class="btn btn-out">📖 HISTORIEN</a>
   </div>
 </section>
 
 <section class="cards-sec">
-  <h2 class="sec-title">// UTFORSKA SIDAN</h2>
+  <div class="sec-label">NAVIGERA</div>
+  <h2 class="sec-title">UTFORSKA SIDAN</h2>
   <div class="cards">
     <a class="card" href="spelet.html">
       <span class="card-icon">🎮</span>
-      <h3>SPELA FLAPPY BIRD</h3>
-      <p>Testa hur länge du klarar dig. Tryck mellanslag eller klicka för att flyga uppåt och undvika rören.</p>
+      <h3>SPELA</h3>
+      <p>Testa hur länge du klarar dig. Tryck mellanslag eller klicka för att flyga och undvika rören.</p>
     </a>
     <a class="card" href="skaparen.html">
       <span class="card-icon">👨‍💻</span>
-      <h3>OM SKAPAREN</h3>
+      <h3>SKAPAREN</h3>
       <p>Möt Dong Nguyen – den vietnamesiske utvecklaren som skapade spelet ensam på sin fritid.</p>
     </a>
     <a class="card" href="historia.html">
       <span class="card-icon">📜</span>
       <h3>HISTORIEN</h3>
-      <p>Hur gick ett okänt mobilspel viralt på 48 timmar och varför togs det sedan bort frivilligt?</p>
+      <p>Hur gick ett okänt mobilspel viralt på 48 timmar och varför togs det bort frivilligt?</p>
     </a>
     <a class="card" href="gorgen.html">
       <span class="card-icon">🤖</span>
-      <h3>CHATTA MED GÖRGEN</h3>
-      <p>Ställ frågor till vår AI-chatbot Görgen som kan allt om Flappy Bird och hemsidan.</p>
+      <h3>GÖRGEN AI</h3>
+      <p>Chatta med vår AI-guide som kan svara på allt om Flappy Bird och hemsidan.</p>
     </a>
   </div>
 </section>
 
 <section class="facts-sec">
   <div class="fact-box">
-    <h2 class="sec-title">// VISSTE DU ATT...</h2>
+    <div class="sec-label">FAKTA</div>
+    <h2 class="sec-title" style="margin-bottom:28px;">VISSTE DU ATT...</h2>
     <div class="fact-text" id="factText">Laddar faktum...</div>
-    <button class="fact-btn" onclick="newFact()">⚡ NYTT FAKTUM</button>
+    <button class="fact-btn" onclick="newFact()">✦ NYTT FAKTUM</button>
   </div>
 </section>
 
 <section class="links-sec">
-  <h2 class="sec-title">// EXTERNA LÄNKAR</h2>
+  <div class="sec-label" style="text-align:center;margin-bottom:10px;">RESURSER</div>
+  <h2 class="sec-title">EXTERNA LÄNKAR</h2>
   <div class="link-cards">
     <a class="link-card" href="https://flappybird.io" target="_blank" rel="noopener">
       <span class="link-icon">🎮</span>
-      <div class="link-title">SPELA FLAPPY BIRD</div>
-      <div class="link-desc">Spela originalspelet direkt i webbläsaren på flappybird.io</div>
+      <div class="link-title">SPELA ONLINE</div>
+      <div class="link-desc">Spela originalspelet direkt i webbläsaren</div>
       <div class="link-url">flappybird.io ↗</div>
     </a>
     <a class="link-card" href="https://x.com/dongatory" target="_blank" rel="noopener">
       <span class="link-icon">👨‍💻</span>
-      <div class="link-title">DONG NGUYENS TWITTER</div>
-      <div class="link-desc">Följ skaparen Dong Nguyen på X / Twitter</div>
+      <div class="link-title">DONG NGUYEN</div>
+      <div class="link-desc">Följ skaparen på X / Twitter</div>
       <div class="link-url">x.com/dongatory ↗</div>
     </a>
     <a class="link-card" href="https://en.wikipedia.org/wiki/Flappy_Bird" target="_blank" rel="noopener">
       <span class="link-icon">📖</span>
       <div class="link-title">WIKIPEDIA</div>
-      <div class="link-desc">Läs hela Flappy Birds Wikipedia-artikel på engelska</div>
+      <div class="link-desc">Läs hela Wikipedia-artikeln på engelska</div>
       <div class="link-url">wikipedia.org ↗</div>
     </a>
   </div>
 </section>
 
 <footer>
-  <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
+  <div>FLAPPY UNIVERSE &nbsp;·&nbsp; SKOLPROJEKT</div>
   <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
 </footer>
 
@@ -196,8 +213,8 @@ function newFact() {
   let i; do { i = Math.floor(Math.random()*facts.length); } while(i===last);
   last = i;
   const el = document.getElementById('factText');
-  el.style.opacity='0'; el.style.transform='translateY(6px)';
-  setTimeout(()=>{ el.textContent=facts[i]; el.style.transition='opacity .3s,transform .3s'; el.style.opacity='1'; el.style.transform='translateY(0)'; },180);
+  el.style.opacity='0';
+  setTimeout(()=>{ el.textContent=facts[i]; el.style.transition='opacity .4s'; el.style.opacity='1'; },200);
 }
 newFact();
 </script>
