@@ -3,60 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skaparen – Dong Nguyen</title>
+<title>Skaparen – Flappy Universe</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root { --cyan:#00f5ff; --mork:#050b14; --yta:#0a1628; --yta2:#0d1f35; --kant:#0e2a40; --text:#c8f0ff; }
+  :root { --guld:#c9a84c; --guld2:#e8c97a; --mork:#1a1008; --yta:#241808; --yta2:#2e2010; --kant:#4a3418; --text:#f5ead8; --creme:#f9f3e8; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Nunito',sans-serif; background:var(--mork); color:var(--text); min-height:100vh; overflow-x:hidden; }
-  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,11,20,.97);border-bottom:2px solid var(--cyan);box-shadow:0 0 18px rgba(0,245,255,.18);display:flex;align-items:center;padding:0 16px;height:58px;gap:4px; }
-  .logo { font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--cyan);text-decoration:none;margin-right:auto;text-shadow:0 0 10px var(--cyan);white-space:nowrap; }
-  nav a { font-family:'Press Start 2P',monospace;font-size:.4rem;color:#5599bb;text-decoration:none;padding:6px 9px;border:2px solid transparent;border-radius:4px;transition:.15s;white-space:nowrap; }
-  nav a:hover,nav a.on { color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.07);box-shadow:0 0 10px rgba(0,245,255,.15); }
-  .page { padding-top:58px; }
-  .hero-band { background:radial-gradient(ellipse at 50% 0%,#071e38 0%,#050b14 80%);padding:64px 24px 44px;text-align:center;position:relative;overflow:hidden; }
-  .hero-band::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.03) 1px,transparent 1px);background-size:36px 36px; }
-  .hero-band::after { content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .hero-band h1 { font-family:'Press Start 2P',monospace;font-size:clamp(.85rem,3vw,1.35rem);color:var(--cyan);text-shadow:0 0 18px var(--cyan);margin-bottom:10px;position:relative; }
-  .hero-band p { color:rgba(200,240,255,.5);font-size:.9rem;margin-top:6px;position:relative; }
-  .content { max-width:880px;margin:0 auto;padding:48px 24px; }
-  .profile { display:flex;gap:36px;align-items:flex-start;background:var(--yta);border:1px solid var(--kant);border-radius:6px;padding:32px;margin-bottom:44px;flex-wrap:wrap;position:relative;overflow:hidden; }
-  .profile::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
-  .portrait-wrap { flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px; }
-  .portrait { width:150px;height:150px;border-radius:4px;border:2px solid var(--cyan);box-shadow:0 0 24px rgba(0,245,255,.3);overflow:hidden;background:#071828; }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,16,8,.98);border-bottom:1px solid var(--guld);box-shadow:0 2px 24px rgba(201,168,76,.12);display:flex;align-items:center;padding:0 32px;height:62px;gap:4px; }
+  .logo { font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--guld);text-decoration:none;margin-right:auto;letter-spacing:1px; }
+  nav a { font-family:'Press Start 2P',monospace;font-size:.38rem;color:rgba(245,234,216,.5);text-decoration:none;padding:7px 11px;border:1px solid transparent;border-radius:2px;transition:.2s;white-space:nowrap; }
+  nav a:hover,nav a.on { color:var(--guld);border-color:var(--guld);background:rgba(201,168,76,.07); }
+  .page { padding-top:62px; }
+  .hero-band { background:radial-gradient(ellipse at 50% 0%,#2e1e08 0%,#1a1008 80%);padding:60px 32px 44px;text-align:center;position:relative;overflow:hidden; }
+  .hero-band::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px);background-size:60px 60px; }
+  .hero-band::after { content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--guld),transparent); }
+  .sec-label { font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--guld);letter-spacing:4px;margin-bottom:10px;opacity:.6;position:relative; }
+  .hero-band h1 { font-family:'Press Start 2P',monospace;font-size:clamp(.85rem,3vw,1.3rem);color:var(--creme);margin-bottom:10px;position:relative;letter-spacing:1px;line-height:1.7; }
+  .hero-band p { color:rgba(245,234,216,.45);font-size:.88rem;position:relative; }
+  .content { max-width:880px;margin:0 auto;padding:52px 32px; }
+  .divider { height:1px;background:linear-gradient(90deg,transparent,var(--kant),transparent);margin:40px 0; }
+  .profile { display:flex;gap:40px;align-items:flex-start;background:var(--yta);border:1px solid var(--kant);padding:36px;margin-bottom:0;flex-wrap:wrap;position:relative; }
+  .profile::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--guld),transparent); }
+  .portrait-wrap { flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:12px; }
+  .portrait { width:148px;height:148px;border:1px solid var(--guld);overflow:hidden;background:#1a0e04;box-shadow:0 4px 24px rgba(0,0,0,.4); }
   .portrait canvas { display:block;width:100%;height:100%;image-rendering:pixelated; }
-  .p-name { font-family:'Press Start 2P',monospace;font-size:.52rem;color:var(--cyan);text-align:center;line-height:1.9;text-shadow:0 0 8px var(--cyan); }
+  .p-name { font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--guld);text-align:center;line-height:2; }
   .profile-text { flex:1;min-width:200px; }
-  .profile-text h2 { font-family:'Press Start 2P',monospace;font-size:.9rem;color:var(--cyan);margin-bottom:6px;text-shadow:0 0 10px var(--cyan); }
-  .profile-text .sub { font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(200,240,255,.35);margin-bottom:18px; }
-  .profile-text p { font-size:.9rem;line-height:1.8;color:rgba(200,240,255,.78);margin-bottom:10px; }
-  .stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:44px; }
-  .stat { background:var(--yta);border:1px solid var(--kant);border-radius:4px;padding:16px 12px;text-align:center;transition:.25s;position:relative;overflow:hidden; }
-  .stat::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:.25s; }
-  .stat:hover { border-color:rgba(0,245,255,.4);transform:translateY(-4px);box-shadow:0 0 20px rgba(0,245,255,.1); }
-  .stat:hover::before { opacity:1; }
-  .stat-n { font-family:'Press Start 2P',monospace;font-size:.95rem;color:var(--cyan);display:block;margin-bottom:6px;text-shadow:0 0 10px var(--cyan); }
-  .stat-l { font-size:.73rem;color:rgba(200,240,255,.45);line-height:1.4; }
-  .sec-title { font-family:'Press Start 2P',monospace;font-size:.78rem;color:var(--cyan);text-shadow:0 0 10px var(--cyan);margin-bottom:22px;padding-left:14px;border-left:3px solid var(--cyan); }
-  .facts { display:flex;flex-direction:column;gap:12px;margin-bottom:44px; }
-  .fact { display:flex;gap:14px;background:var(--yta);border:1px solid var(--kant);border-radius:4px;padding:18px;align-items:flex-start;transition:.2s; }
-  .fact:hover { border-color:rgba(0,245,255,.3);background:var(--yta2); }
-  .fact-ico { font-size:1.5rem;flex-shrink:0; }
-  .fact h4 { font-family:'Press Start 2P',monospace;font-size:.52rem;color:var(--cyan);margin-bottom:5px;line-height:1.6; }
-  .fact p { font-size:.85rem;color:rgba(200,240,255,.65);line-height:1.7; }
-  .quote { background:var(--yta);border:1px solid rgba(0,245,255,.2);border-radius:6px;padding:30px;text-align:center;margin-bottom:44px;position:relative;overflow:hidden; }
-  .quote::before,.quote::after { content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+  .profile-text h2 { font-family:'Press Start 2P',monospace;font-size:.85rem;color:var(--creme);margin-bottom:6px;letter-spacing:1px; }
+  .profile-text .sub { font-family:'Press Start 2P',monospace;font-size:.42rem;color:rgba(245,234,216,.3);margin-bottom:20px;letter-spacing:1px; }
+  .profile-text p { font-size:.9rem;line-height:1.85;color:rgba(245,234,216,.72);margin-bottom:12px; }
+  .stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;margin:0;background:var(--kant);border:1px solid var(--kant); }
+  .stat { background:var(--yta);padding:20px 14px;text-align:center;transition:.2s; }
+  .stat:hover { background:var(--yta2); }
+  .stat-n { font-family:'Press Start 2P',monospace;font-size:.9rem;color:var(--guld);display:block;margin-bottom:6px; }
+  .stat-l { font-size:.72rem;color:rgba(245,234,216,.4);line-height:1.4; }
+  .sec-title { font-family:'Press Start 2P',monospace;font-size:.72rem;color:var(--creme);margin-bottom:24px;padding-left:16px;border-left:2px solid var(--guld);letter-spacing:.5px;line-height:1.8; }
+  .facts-list { display:flex;flex-direction:column;gap:1px;background:var(--kant);border:1px solid var(--kant);margin-bottom:0; }
+  .fact-item { display:flex;gap:16px;background:var(--yta);padding:20px 22px;align-items:flex-start;transition:.2s; }
+  .fact-item:hover { background:var(--yta2); }
+  .fact-ico { font-size:1.4rem;flex-shrink:0;margin-top:2px; }
+  .fact-item h4 { font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--guld);margin-bottom:6px;line-height:1.7; }
+  .fact-item p { font-size:.84rem;color:rgba(245,234,216,.62);line-height:1.75; }
+  .quote { background:var(--yta);border:1px solid var(--kant);padding:36px;text-align:center;position:relative;overflow:hidden; }
+  .quote::before,.quote::after { content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--guld),transparent); }
   .quote::before{top:0;}.quote::after{bottom:0;}
-  .quote blockquote { font-size:1rem;font-style:italic;color:rgba(200,240,255,.82);line-height:1.85;margin-bottom:14px; }
-  .quote cite { font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(200,240,255,.3); }
-  footer { background:#030810;border-top:1px solid var(--kant);text-align:center;padding:26px;font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(200,240,255,.25);line-height:2.2; }
-  footer b { color:var(--cyan);text-shadow:0 0 8px var(--cyan); }
-  @media(max-width:600px){ .profile{flex-direction:column;align-items:center;} nav a{font-size:.35rem;padding:5px 6px;} .logo{font-size:.55rem;} }
+  .quote blockquote { font-size:.95rem;font-style:italic;color:rgba(245,234,216,.8);line-height:1.9;margin-bottom:16px; }
+  .quote cite { font-family:'Press Start 2P',monospace;font-size:.42rem;color:rgba(245,234,216,.25); }
+  footer { background:#100a04;border-top:1px solid var(--kant);text-align:center;padding:28px;font-family:'Press Start 2P',monospace;font-size:.42rem;color:rgba(245,234,216,.2);line-height:2.4; }
+  footer b { color:var(--guld); }
+  @media(max-width:600px){ .profile{flex-direction:column;align-items:center;} nav a{font-size:.32rem;padding:5px 7px;} .logo{font-size:.55rem;} nav{padding:0 16px;} }
 </style>
 </head>
 <body>
 <nav>
-  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html" class="logo">🐦 FLAPPY UNIVERSE</a>
   <a href="index.html">HEM</a>
   <a href="spelet.html">SPELA</a>
   <a href="skaparen.html" class="on">SKAPAREN</a>
@@ -65,7 +65,8 @@
 </nav>
 <div class="page">
   <div class="hero-band">
-    <h1>// OM SKAPAREN</h1>
+    <div class="sec-label">PORTRÄTT</div>
+    <h1>OM SKAPAREN</h1>
     <p>Mannen bakom världens mest beroendeframkallande spel</p>
   </div>
   <div class="content">
@@ -88,42 +89,44 @@
       <div class="stat"><span class="stat-n">$50K</span><span class="stat-l">Per dag i reklamintäkter</span></div>
       <div class="stat"><span class="stat-n">1 pers.</span><span class="stat-l">Byggde hela spelet ensam</span></div>
     </div>
+    <div class="divider"></div>
     <h2 class="sec-title">FAKTA OM NGUYEN</h2>
-    <div class="facts">
-      <div class="fact"><div class="fact-ico">🏠</div><div><h4>UPPVUXEN I HANOI</h4><p>Nguyen växte upp i Vietnams huvudstad och lärde sig programmera tidigt med ett brinnande intresse för klassiska arkadspel.</p></div></div>
-      <div class="fact"><div class="fact-ico">⏱️</div><div><h4>SKAPADE SPELET PÅ 2–3 DAGAR</h4><p>Konceptet byggdes på några dagar. Han ville ha ett spel att spela med en hand – till exempel i tunnelbanan.</p></div></div>
-      <div class="fact"><div class="fact-ico">📱</div><div><h4>INSPIRERAD AV SUPER MARIO</h4><p>Rörens design kom direkt från Super Mario Bros. Nguyen ville ha ett igenkännbart hinder som alla förstod omedelbart.</p></div></div>
-      <div class="fact"><div class="fact-ico">💔</div><div><h4>ÅNGRADE SIG ÖVER BEROENDET</h4><p>Han fick ständiga meddelanden om att folk missade skolan eller jobbet. Skulden var en av orsakerna till att han tog bort spelet.</p></div></div>
-      <div class="fact"><div class="fact-ico">🎮</div><div><h4>FORTSÄTTER SKAPA SPEL</h4><p>Efter Flappy Bird kom Swing Copters (2014) och Ninja Spinki Challenges (2016) – men inget nådde samma popularitet.</p></div></div>
+    <div class="facts-list">
+      <div class="fact-item"><div class="fact-ico">🏠</div><div><h4>UPPVUXEN I HANOI</h4><p>Nguyen växte upp i Vietnams huvudstad och lärde sig programmera tidigt med ett brinnande intresse för klassiska arkadspel.</p></div></div>
+      <div class="fact-item"><div class="fact-ico">⏱️</div><div><h4>SKAPADE SPELET PÅ 2–3 DAGAR</h4><p>Konceptet byggdes på några dagar. Han ville ha ett spel att spela med en hand – till exempel i tunnelbanan.</p></div></div>
+      <div class="fact-item"><div class="fact-ico">📱</div><div><h4>INSPIRERAD AV SUPER MARIO</h4><p>Rörens design kom direkt från Super Mario Bros. Nguyen ville ha ett igenkännbart hinder som alla förstod omedelbart.</p></div></div>
+      <div class="fact-item"><div class="fact-ico">💔</div><div><h4>ÅNGRADE SIG ÖVER BEROENDET</h4><p>Han fick ständiga meddelanden om att folk missade skolan eller jobbet. Skulden var en av orsakerna till att han tog bort spelet.</p></div></div>
+      <div class="fact-item"><div class="fact-ico">🎮</div><div><h4>FORTSÄTTER SKAPA SPEL</h4><p>Efter Flappy Bird kom Swing Copters (2014) och Ninja Spinki Challenges (2016) – men inget nådde samma popularitet.</p></div></div>
     </div>
+    <div class="divider"></div>
     <div class="quote">
       <blockquote>"Flappy Bird was designed to play in a few minutes when you are relaxed. But it happened to become an addictive product. I feel bad about this."</blockquote>
       <cite>– DONG NGUYEN · ROLLING STONE · 2014</cite>
     </div>
   </div>
   <footer>
-    <div>FLAPPY BIRD HEMSIDA &nbsp;·&nbsp; SKOLPROJEKT</div>
+    <div>FLAPPY UNIVERSE &nbsp;·&nbsp; SKOLPROJEKT</div>
     <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
   </footer>
 </div>
 <script>
 const c=document.getElementById('pc'),x=c.getContext('2d');
 const p=(px,py,w,h,col)=>{x.fillStyle=col;x.fillRect(px,py,w,h);};
-p(0,0,75,75,'#071828');
-p(22,11,30,9,'#001a0a');p(19,17,37,7,'#001a0a');p(15,21,7,15,'#001a0a');p(53,21,7,15,'#001a0a');
-p(19,19,37,30,'#006a7a');p(17,27,4,14,'#006a7a');p(54,27,4,14,'#006a7a');
-p(24,29,7,5,'#cff');p(44,29,7,5,'#cff');
-p(26,30,4,3,'#003a44');p(46,30,4,3,'#003a44');
+p(0,0,75,75,'#1a0e04');
+p(22,11,30,9,'#2a1a06');p(19,17,37,7,'#2a1a06');p(15,21,7,15,'#2a1a06');p(53,21,7,15,'#2a1a06');
+p(19,19,37,30,'#c8956a');p(17,27,4,14,'#c8956a');p(54,27,4,14,'#c8956a');
+p(24,29,7,5,'#fff');p(44,29,7,5,'#fff');
+p(26,30,4,3,'#3a2010');p(46,30,4,3,'#3a2010');
 p(27,31,2,2,'#000');p(47,31,2,2,'#000');
-p(31,29,2,2,'#00f5ff');p(51,29,2,2,'#00f5ff');
-p(22,25,11,3,'#001a0a');p(42,25,11,3,'#001a0a');
-p(34,37,7,4,'#005566');p(32,41,4,3,'#005566');p(40,41,4,3,'#005566');
-p(26,47,23,3,'#004455');p(24,45,4,4,'#004455');p(47,45,4,4,'#004455');
-p(28,49,19,3,'#00a8c0');
-p(15,29,6,7,'#006a7a');p(54,29,6,7,'#006a7a');
-p(26,50,23,9,'#006a7a');
-p(8,59,59,17,'#003a5a');p(26,50,23,11,'#003a5a');
-p(22,57,11,6,'#00f5ff');p(42,57,11,6,'#00f5ff');
+p(31,29,2,2,'#fff');p(51,29,2,2,'#fff');
+p(22,25,11,3,'#2a1a06');p(42,25,11,3,'#2a1a06');
+p(34,37,7,4,'#a06040');p(32,41,4,3,'#a06040');p(40,41,4,3,'#a06040');
+p(26,47,23,3,'#7a3a18');p(24,45,4,4,'#7a3a18');p(47,45,4,4,'#7a3a18');
+p(28,49,19,3,'#d4704a');
+p(15,29,6,7,'#c8956a');p(54,29,6,7,'#c8956a');
+p(26,50,23,9,'#c8956a');
+p(8,59,59,17,'#3a2a60');p(26,50,23,11,'#3a2a60');
+p(22,57,11,6,'#f5ead8');p(42,57,11,6,'#f5ead8');
 </script>
 </body>
 </html>
