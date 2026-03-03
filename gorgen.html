@@ -42,40 +42,37 @@ nav a:hover,nav a.on { color:var(--guld);border-color:var(--guld);background:rgb
 .msg.bot .msg-bubble { background:var(--yta);border:1px solid var(--kant);color:var(--text);border-radius:2px 12px 12px 12px; }
 .msg.user .msg-bubble { background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--creme);border-radius:12px 2px 12px 12px; }
 
-/* Navigationsknappar i chatten */
-.nav-btn {
+/* Klickbar navigationsknapp i chatten */
+.nav-link-btn {
   display:inline-block;
   margin-top:10px;
   font-family:'Press Start 2P',monospace;
-  font-size:.38rem;
-  padding:8px 14px;
+  font-size:.42rem;
+  padding:9px 14px;
   background:transparent;
   color:var(--guld);
   border:1px solid var(--guld);
   border-radius:2px;
-  cursor:pointer;
   text-decoration:none;
+  cursor:pointer;
   transition:.2s;
   letter-spacing:.5px;
 }
-.nav-btn:hover { background:rgba(201,168,76,.12); }
+.nav-link-btn:hover { background:rgba(201,168,76,.12); }
 
 .typing { display:flex;align-items:center;gap:5px;padding:14px 16px; }
 .typing span { width:6px;height:6px;border-radius:50%;background:var(--guld);opacity:.3;animation:ty 1.2s ease-in-out infinite; }
 .typing span:nth-child(2){animation-delay:.2s} .typing span:nth-child(3){animation-delay:.4s}
 @keyframes ty { 0%,100%{opacity:.3;transform:translateY(0)} 50%{opacity:.9;transform:translateY(-4px)} }
-
 .suggestions { padding:10px 18px;background:var(--yta);border-left:1px solid var(--kant);border-right:1px solid var(--kant);display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;border-top:1px solid rgba(201,168,76,.08); }
 .sug-btn { font-family:'Press Start 2P',monospace;font-size:.36rem;padding:6px 10px;background:transparent;color:rgba(245,234,216,.4);border:1px solid var(--kant);cursor:pointer;transition:.2s;white-space:nowrap; }
 .sug-btn:hover { color:var(--guld);border-color:var(--guld);background:rgba(201,168,76,.06); }
-
 .input-row { display:flex;background:var(--yta);border:1px solid var(--kant);border-top:1px solid rgba(201,168,76,.15);overflow:hidden;flex-shrink:0;margin-bottom:28px; }
 #userInput { flex:1;padding:16px 20px;background:transparent;border:none;color:var(--creme);font-family:'Nunito',sans-serif;font-size:.93rem;outline:none; }
 #userInput::placeholder { color:rgba(245,234,216,.25); }
 #sendBtn { font-family:'Press Start 2P',monospace;font-size:.48rem;padding:0 22px;background:var(--guld);color:var(--mork);border:none;cursor:pointer;transition:.2s;flex-shrink:0;letter-spacing:.5px; }
 #sendBtn:hover { background:var(--guld2); }
 #sendBtn:disabled { background:var(--kant);color:rgba(245,234,216,.3);cursor:default; }
-
 footer { background:#100a04;border-top:1px solid var(--kant);text-align:center;padding:24px;font-family:'Press Start 2P',monospace;font-size:.4rem;color:rgba(245,234,216,.18);line-height:2.4; }
 footer b { color:var(--guld); }
 @media(max-width:600px){ nav a{font-size:.32rem;padding:5px 7px;} .logo{font-size:.55rem;} nav{padding:0 16px;} .chat-wrap{padding:20px 16px 0;} .msg-bubble{max-width:85%;} }
@@ -90,63 +87,41 @@ footer b { color:var(--guld); }
   <a href="historia.html">HISTORIA</a>
   <a href="gorgen.html" class="on">GÖRGEN 🤖</a>
 </nav>
-
 <div class="page">
   <div class="hero-band">
     <div class="sec-label">AI-GUIDE</div>
     <h1>CHATTA MED GÖRGEN</h1>
-    <p>Riktig AI – guidar dig runt på Flappy Universe</p>
+    <p>Riktig AI – svarar på vad som helst om Flappy Bird</p>
   </div>
-
   <div class="chat-wrap">
     <div class="gorgen-header">
       <div class="gorgen-avatar">🤖</div>
       <div>
         <div class="gorgen-name">GÖRGEN</div>
-        <div class="gorgen-status"><span class="status-dot"></span> Online – redo att guida</div>
+        <div class="gorgen-status"><span class="status-dot"></span> Online – AI-driven</div>
       </div>
     </div>
-
     <div id="messages"></div>
-
     <div class="suggestions">
-      <button class="sug-btn" onclick="ask('Visa mig runt på hemsidan!')">Guida mig runt!</button>
+      <button class="sug-btn" onclick="ask('Hur spelar man Flappy Bird?')">Hur spelar man?</button>
       <button class="sug-btn" onclick="ask('Vem skapade Flappy Bird?')">Vem skapade det?</button>
-      <button class="sug-btn" onclick="ask('Var kan jag spela?')">Var spelar man?</button>
       <button class="sug-btn" onclick="ask('Varför togs Flappy Bird bort?')">Varför togs det bort?</button>
       <button class="sug-btn" onclick="ask('Berätta ett roligt faktum!')">Roligt faktum!</button>
+      <button class="sug-btn" onclick="ask('Vad finns på hemsidan?')">Vad finns på sidan?</button>
     </div>
-
     <div class="input-row">
-      <input type="text" id="userInput" placeholder="Fråga Görgen något..." maxlength="400"/>
+      <input type="text" id="userInput" placeholder="Skriv din fråga här..." maxlength="400"/>
       <button id="sendBtn" onclick="send()">SKICKA ▶</button>
     </div>
   </div>
 </div>
-
 <footer>
   <div>FLAPPY UNIVERSE &nbsp;·&nbsp; SKOLPROJEKT</div>
   <div>Görgen drivs av <b>CLAUDE AI</b> &nbsp;·&nbsp; Originalspelet av <b>DONG NGUYEN</b> 2013</div>
 </footer>
-
 <script>
 const WORKER_URL = 'https://gorgen-api.ebbbac514.workers.dev';
 let history = [];
-
-// Omvandlar [TEXT|fil.html] till klickbara knappar
-function parseNavLinks(text) {
-  return text.replace(/\[([^\|]+)\|([^\]]+)\]/g, (match, label, file) => {
-    return `<a class="nav-btn" href="${file}">▶ ${label}</a>`;
-  });
-}
-
-function formatText(text) {
-  return parseNavLinks(
-    text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br>')
-  );
-}
 
 async function send() {
   const inp = document.getElementById('userInput');
@@ -180,13 +155,31 @@ function ask(txt) {
   send();
 }
 
+// Parsar [LÄNK:url:text] och gör om dem till klickbara knappar
+function parseLinks(text) {
+  // Ersätt [LÄNK:url:etikett] med en klickbar knapp
+  return text.replace(/\[LÄNK:([^\]]+?):([^\]]+?)\]/g, (match, url, label) => {
+    return `<br><a class="nav-link-btn" href="${url}">${label}</a>`;
+  });
+}
+
 function addMsg(role, text) {
   const wrap = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = `msg ${role}`;
+  
+  let formatted = text
+    .replace(/\n/g, '<br>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Omvandla länk-taggar till knappar bara i bot-meddelanden
+  if (role === 'bot') {
+    formatted = parseLinks(formatted);
+  }
+
   div.innerHTML = `
-    <div class="msg-avatar">${role==='bot'?'🤖':'👤'}</div>
-    <div class="msg-bubble">${formatText(text)}</div>
+    <div class="msg-avatar">${role === 'bot' ? '🤖' : '👤'}</div>
+    <div class="msg-bubble">${formatted}</div>
   `;
   wrap.appendChild(div);
   wrap.scrollTop = wrap.scrollHeight;
@@ -195,21 +188,23 @@ function addMsg(role, text) {
 function showTyping() {
   const wrap = document.getElementById('messages');
   const div = document.createElement('div');
-  div.className='msg bot'; div.id='typing';
-  div.innerHTML=`<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
-  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
+  div.className = 'msg bot'; div.id = 'typing';
+  div.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
 }
 
 function hideTyping() {
-  const t=document.getElementById('typing'); if(t)t.remove();
+  const t = document.getElementById('typing');
+  if (t) t.remove();
 }
 
 document.getElementById('userInput').addEventListener('keydown', e => {
-  if(e.key==='Enter'){e.preventDefault();send();}
+  if (e.key === 'Enter') { e.preventDefault(); send(); }
 });
 
 setTimeout(() => {
-  addMsg('bot', 'Välkommen till Flappy Universe! Jag är Görgen 🤖 – din personliga guide.\n\nJag kan svara på frågor om Flappy Bird OCH guida dig runt på hemsidan med klickbara knappar. Vad vill du veta?\n\nOch förresten... varför är Görgen så bra på att guida? För han vet alltid vilken VÄGG man ska undvika! (skratta nu)');
+  addMsg('bot', 'Välkommen till Flappy Universe! Jag är Görgen 🤖 – din AI-guide.\n\nFråga mig om historien, skaparen Dong Nguyen, hur man spelar, eller be mig guida dig till rätt sida. Vad vill du veta?');
 }, 300);
 </script>
 </body>
