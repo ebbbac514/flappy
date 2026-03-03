@@ -25,26 +25,14 @@
   .profile { display:flex;gap:40px;align-items:flex-start;background:var(--yta);border:1px solid var(--kant);padding:36px;margin-bottom:0;flex-wrap:wrap;position:relative; }
   .profile::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--guld),transparent); }
   .portrait-wrap { flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:12px; }
-  .portrait {
-    width:160px; height:200px;
-    border:1px solid var(--guld);
-    overflow:hidden;
-    box-shadow:0 4px 24px rgba(0,0,0,.5);
-    background:var(--yta2);
-  }
-  .portrait img {
-    width:100%; height:100%;
-    object-fit:cover;
-    object-position:top center;
-    display:block;
-    filter:sepia(15%) contrast(1.05);
-  }
+  .portrait { width:148px;height:148px;border:1px solid var(--guld);overflow:hidden;background:#1a0e04;box-shadow:0 4px 24px rgba(0,0,0,.4); }
+  .portrait canvas { display:block;width:100%;height:100%;image-rendering:pixelated; }
   .p-name { font-family:'Press Start 2P',monospace;font-size:.48rem;color:var(--guld);text-align:center;line-height:2; }
   .profile-text { flex:1;min-width:200px; }
   .profile-text h2 { font-family:'Press Start 2P',monospace;font-size:.85rem;color:var(--creme);margin-bottom:6px;letter-spacing:1px; }
   .profile-text .sub { font-family:'Press Start 2P',monospace;font-size:.42rem;color:rgba(245,234,216,.3);margin-bottom:20px;letter-spacing:1px; }
   .profile-text p { font-size:.9rem;line-height:1.85;color:rgba(245,234,216,.72);margin-bottom:12px; }
-  .stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--kant);border:1px solid var(--kant); }
+  .stats { display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;margin:0;background:var(--kant);border:1px solid var(--kant); }
   .stat { background:var(--yta);padding:20px 14px;text-align:center;transition:.2s; }
   .stat:hover { background:var(--yta2); }
   .stat-n { font-family:'Press Start 2P',monospace;font-size:.9rem;color:var(--guld);display:block;margin-bottom:6px; }
@@ -84,12 +72,7 @@
   <div class="content">
     <div class="profile">
       <div class="portrait-wrap">
-        <div class="portrait">
-          <img
-  src="dong.jpg"
-  alt="Dong Nguyen – skaparen av Flappy Bird"
-/>
-        </div>
+        <div class="portrait"><canvas id="pc" width="75" height="75"></canvas></div>
         <div class="p-name">DONG NGUYEN<br>🇻🇳 VIETNAM</div>
       </div>
       <div class="profile-text">
@@ -126,5 +109,24 @@
     <div>Originalspelet av <b>DONG NGUYEN</b> &nbsp;·&nbsp; .GEARS Studios &nbsp;·&nbsp; 2013</div>
   </footer>
 </div>
+<script>
+const c=document.getElementById('pc'),x=c.getContext('2d');
+const p=(px,py,w,h,col)=>{x.fillStyle=col;x.fillRect(px,py,w,h);};
+p(0,0,75,75,'#1a0e04');
+p(22,11,30,9,'#2a1a06');p(19,17,37,7,'#2a1a06');p(15,21,7,15,'#2a1a06');p(53,21,7,15,'#2a1a06');
+p(19,19,37,30,'#c8956a');p(17,27,4,14,'#c8956a');p(54,27,4,14,'#c8956a');
+p(24,29,7,5,'#fff');p(44,29,7,5,'#fff');
+p(26,30,4,3,'#3a2010');p(46,30,4,3,'#3a2010');
+p(27,31,2,2,'#000');p(47,31,2,2,'#000');
+p(31,29,2,2,'#fff');p(51,29,2,2,'#fff');
+p(22,25,11,3,'#2a1a06');p(42,25,11,3,'#2a1a06');
+p(34,37,7,4,'#a06040');p(32,41,4,3,'#a06040');p(40,41,4,3,'#a06040');
+p(26,47,23,3,'#7a3a18');p(24,45,4,4,'#7a3a18');p(47,45,4,4,'#7a3a18');
+p(28,49,19,3,'#d4704a');
+p(15,29,6,7,'#c8956a');p(54,29,6,7,'#c8956a');
+p(26,50,23,9,'#c8956a');
+p(8,59,59,17,'#3a2a60');p(26,50,23,11,'#3a2a60');
+p(22,57,11,6,'#f5ead8');p(42,57,11,6,'#f5ead8');
+</script>
 </body>
 </html>
