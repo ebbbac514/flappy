@@ -3,38 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spela Flappy Bird</title>
+<title>Spela – Flappy Universe</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@700&display=swap" rel="stylesheet">
 <style>
-  :root { --cyan:#00f5ff; --mork:#050b14; --yta:#0a1628; }
+  :root { --guld:#c9a84c; --guld2:#e8c97a; --mork:#1a1008; --yta:#241808; --yta2:#2e2010; --kant:#4a3418; --text:#f5ead8; --creme:#f9f3e8; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--mork); font-family:'Nunito',sans-serif; color:#c8f0ff; display:flex; flex-direction:column; align-items:center; min-height:100vh; overflow-x:hidden; }
-  nav { width:100%; background:rgba(5,11,20,.97); border-bottom:2px solid var(--cyan); box-shadow:0 0 18px rgba(0,245,255,.18); display:flex; align-items:center; padding:0 16px; height:58px; gap:4px; flex-shrink:0; }
-  .logo { font-family:'Press Start 2P',monospace; font-size:.65rem; color:var(--cyan); text-decoration:none; margin-right:auto; text-shadow:0 0 10px var(--cyan); white-space:nowrap; }
-  nav a { font-family:'Press Start 2P',monospace; font-size:.4rem; color:#5599bb; text-decoration:none; padding:6px 9px; border:2px solid transparent; border-radius:4px; transition:.15s; white-space:nowrap; }
-  nav a:hover, nav a.on { color:var(--cyan); border-color:var(--cyan); background:rgba(0,245,255,.07); box-shadow:0 0 10px rgba(0,245,255,.15); }
-  h1 { font-family:'Press Start 2P',monospace; color:var(--cyan); font-size:clamp(.75rem,2.5vw,1.05rem); text-shadow:0 0 14px var(--cyan); margin:18px 0 6px; text-align:center; }
-  .hint { font-size:.82rem; color:rgba(200,240,255,.45); margin-bottom:14px; text-align:center; }
-  .hint b { color:var(--cyan); }
+  body { background:var(--mork); font-family:'Nunito',sans-serif; color:var(--text); display:flex; flex-direction:column; align-items:center; min-height:100vh; overflow-x:hidden; }
+  nav { width:100%; background:rgba(26,16,8,.98); border-bottom:1px solid var(--guld); box-shadow:0 2px 24px rgba(201,168,76,.12); display:flex; align-items:center; padding:0 32px; height:62px; gap:4px; flex-shrink:0; }
+  .logo { font-family:'Press Start 2P',monospace; font-size:.65rem; color:var(--guld); text-decoration:none; margin-right:auto; letter-spacing:1px; }
+  nav a { font-family:'Press Start 2P',monospace; font-size:.38rem; color:rgba(245,234,216,.5); text-decoration:none; padding:7px 11px; border:1px solid transparent; border-radius:2px; transition:.2s; white-space:nowrap; }
+  nav a:hover,nav a.on { color:var(--guld); border-color:var(--guld); background:rgba(201,168,76,.07); }
+  h1 { font-family:'Press Start 2P',monospace; color:var(--guld); font-size:clamp(.7rem,2.5vw,1rem); margin:22px 0 6px; text-align:center; letter-spacing:2px; }
+  .hint { font-size:.8rem; color:rgba(245,234,216,.4); margin-bottom:16px; text-align:center; }
+  .hint b { color:var(--guld); }
   #wrap { position:relative; line-height:0; }
-  canvas { display:block; border:2px solid var(--cyan); border-radius:6px; box-shadow:0 0 30px rgba(0,245,255,.3),0 0 60px rgba(0,245,255,.1); cursor:pointer; touch-action:none; max-width:calc(100vw - 24px); }
-  .scorebar { display:flex; justify-content:space-between; width:100%; padding:8px 2px 0; font-family:'Press Start 2P',monospace; font-size:.55rem; color:rgba(200,240,255,.4); }
-  .scorebar span { color:var(--cyan); text-shadow:0 0 8px var(--cyan); }
-  footer { margin-top:auto; padding:20px; font-family:'Press Start 2P',monospace; font-size:.42rem; color:rgba(200,240,255,.2); text-align:center; line-height:2.2; }
-  footer b { color:var(--cyan); }
-  @media(max-width:600px){ nav a{font-size:.35rem;padding:5px 6px;} .logo{font-size:.55rem;} }
+  canvas { display:block; border:1px solid var(--guld); box-shadow:0 0 40px rgba(201,168,76,.15), 0 8px 32px rgba(0,0,0,.5); cursor:pointer; touch-action:none; max-width:calc(100vw - 24px); }
+  .scorebar { display:flex; justify-content:space-between; width:100%; padding:8px 2px 0; font-family:'Press Start 2P',monospace; font-size:.5rem; color:rgba(245,234,216,.35); }
+  .scorebar span { color:var(--guld); }
+  footer { margin-top:auto; padding:20px; font-family:'Press Start 2P',monospace; font-size:.4rem; color:rgba(245,234,216,.2); text-align:center; line-height:2.2; }
+  footer b { color:var(--guld); }
+  @media(max-width:600px){ nav a{font-size:.32rem;padding:5px 7px;} .logo{font-size:.55rem;} nav{padding:0 16px;} }
 </style>
 </head>
 <body>
 <nav>
-  <a href="index.html" class="logo">🐦 FLAPPY</a>
+  <a href="index.html" class="logo">🐦 FLAPPY UNIVERSE</a>
   <a href="index.html">HEM</a>
   <a href="spelet.html" class="on">SPELA</a>
   <a href="skaparen.html">SKAPAREN</a>
   <a href="historia.html">HISTORIA</a>
   <a href="gorgen.html">GÖRGEN 🤖</a>
 </nav>
-<h1>// FLAPPY BIRD</h1>
+<h1>FLAPPY BIRD</h1>
 <p class="hint">Tryck <b>MELLANSLAG</b> · <b>KLICK</b> · <b>TAP</b> för att flyga</p>
 <div id="wrap">
   <canvas id="c"></canvas>
@@ -43,11 +43,10 @@
     <div>BÄST: <span id="bestEl">0</span></div>
   </div>
 </div>
-<footer>FLAPPY BIRD &nbsp;·&nbsp; SKOLPROJEKT &nbsp;·&nbsp; ORIGINAL AV <b>DONG NGUYEN</b> 2013</footer>
+<footer>FLAPPY UNIVERSE &nbsp;·&nbsp; SKOLPROJEKT &nbsp;·&nbsp; ORIGINAL AV <b>DONG NGUYEN</b> 2013</footer>
 <script>
 const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
-const W=360,H=560;
-canvas.width=W;canvas.height=H;
+const W=360,H=560;canvas.width=W;canvas.height=H;
 function fit(){const mw=Math.min(W,window.innerWidth-24);canvas.style.width=mw+'px';canvas.style.height=Math.round(mw*H/W)+'px';}
 fit();window.addEventListener('resize',fit);
 const GROUND=H-70,GRAVITY=0.38,FLAP=-7.8,PW=52,GAP=148,PMIN=60,PMAX=GROUND-GAP-60;
@@ -55,96 +54,31 @@ let state='idle',score=0,best=+localStorage.getItem('fb_best')||0,raf=null;
 const B={x:80,y:H/2,vy:0,r:16,angle:0,wing:0};
 let pipes=[],ptimer=0,groundX=0,parts=[];
 function onInput(){if(state==='idle'){startGame();return;}if(state==='playing'){B.vy=FLAP;}}
-function onPointer(e){
-  e.preventDefault();
-  if(state==='dead'){const s=canvas.getBoundingClientRect().width/W;const cx=e.offsetX/s,cy=e.offsetY/s;if(cx>W/2-80&&cx<W/2+80&&cy>H/2+24&&cy<H/2+68){startGame();return;}}
-  onInput();
-}
+function onPointer(e){e.preventDefault();if(state==='dead'){const s=canvas.getBoundingClientRect().width/W;const cx=e.offsetX/s,cy=e.offsetY/s;if(cx>W/2-80&&cx<W/2+80&&cy>H/2+24&&cy<H/2+68){startGame();return;}}onInput();}
 document.addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();onInput();}});
 canvas.addEventListener('pointerdown',onPointer);
-function startGame(){
-  state='playing';score=0;pipes=[];parts=[];ptimer=0;groundX=0;
-  B.y=H/2;B.vy=FLAP;B.angle=0;
-  document.getElementById('scoreEl').textContent=0;
-  cancelAnimationFrame(raf);
-  let last=0;
-  function loop(t){const dt=Math.min((t-last)/16.67,3);last=t;update(dt);render();if(state!=='dead')raf=requestAnimationFrame(loop);}
-  raf=requestAnimationFrame(loop);
-}
+function startGame(){state='playing';score=0;pipes=[];parts=[];ptimer=0;groundX=0;B.y=H/2;B.vy=FLAP;B.angle=0;document.getElementById('scoreEl').textContent=0;cancelAnimationFrame(raf);let last=0;function loop(t){const dt=Math.min((t-last)/16.67,3);last=t;update(dt);render();if(state!=='dead')raf=requestAnimationFrame(loop);}raf=requestAnimationFrame(loop);}
 function die(){state='dead';if(score>best){best=score;localStorage.setItem('fb_best',best);}document.getElementById('bestEl').textContent=best;spawnParts(B.x,B.y);render();}
-function update(dt){
-  if(state!=='playing')return;
-  B.vy+=GRAVITY*dt;B.vy=Math.min(B.vy,12);B.y+=B.vy*dt;
-  B.angle=Math.max(-0.45,Math.min(1.3,B.vy*0.065));B.wing+=0.3*dt;
-  const spd=2.5+score*0.05;
-  groundX-=spd*dt;if(groundX<-28)groundX+=28;
-  ptimer+=dt;
-  if(ptimer>=90){ptimer=0;pipes.push({x:W,topH:Math.random()*(PMAX-PMIN)+PMIN,passed:false});}
-  for(let i=pipes.length-1;i>=0;i--){
-    pipes[i].x-=spd*dt;
-    if(pipes[i].x+PW<-10){pipes.splice(i,1);continue;}
-    if(!pipes[i].passed&&pipes[i].x+PW<B.x-B.r){pipes[i].passed=true;score++;document.getElementById('scoreEl').textContent=score;}
-  }
-  for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=0.25*dt;p.life-=0.025*dt;if(p.life<=0)parts.splice(i,1);}
-  if(B.y+B.r>GROUND||B.y-B.r<0){die();return;}
-  for(const p of pipes){if(B.x+B.r-5>p.x&&B.x-B.r+5<p.x+PW){if(B.y-B.r+5<p.topH||B.y+B.r-5>p.topH+GAP){die();return;}}}
-}
+function update(dt){if(state!=='playing')return;B.vy+=GRAVITY*dt;B.vy=Math.min(B.vy,12);B.y+=B.vy*dt;B.angle=Math.max(-0.45,Math.min(1.3,B.vy*0.065));B.wing+=0.3*dt;const spd=2.5+score*0.05;groundX-=spd*dt;if(groundX<-28)groundX+=28;ptimer+=dt;if(ptimer>=90){ptimer=0;pipes.push({x:W,topH:Math.random()*(PMAX-PMIN)+PMIN,passed:false});}for(let i=pipes.length-1;i>=0;i--){pipes[i].x-=spd*dt;if(pipes[i].x+PW<-10){pipes.splice(i,1);continue;}if(!pipes[i].passed&&pipes[i].x+PW<B.x-B.r){pipes[i].passed=true;score++;document.getElementById('scoreEl').textContent=score;}}for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=0.25*dt;p.life-=0.025*dt;if(p.life<=0)parts.splice(i,1);}if(B.y+B.r>GROUND||B.y-B.r<0){die();return;}for(const p of pipes){if(B.x+B.r-5>p.x&&B.x-B.r+5<p.x+PW){if(B.y-B.r+5<p.topH||B.y+B.r-5>p.topH+GAP){die();return;}}}}
 function render(){
-  const sky=ctx.createLinearGradient(0,0,0,GROUND);sky.addColorStop(0,'#020c1b');sky.addColorStop(1,'#071a2e');ctx.fillStyle=sky;ctx.fillRect(0,0,W,GROUND);
-  ctx.strokeStyle='rgba(0,245,255,0.04)';ctx.lineWidth=1;
-  for(let x=0;x<W;x+=36){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,GROUND);ctx.stroke();}
-  for(let y=0;y<GROUND;y+=36){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  const sky=ctx.createLinearGradient(0,0,0,GROUND);sky.addColorStop(0,'#8b6914');sky.addColorStop(1,'#c9941a');ctx.fillStyle=sky;ctx.fillRect(0,0,W,GROUND);
+  ctx.fillStyle='rgba(255,220,100,0.06)';for(let x=0;x<W;x+=48){ctx.fillRect(x,0,1,GROUND);}for(let y=0;y<GROUND;y+=48){ctx.fillRect(0,y,W,1);}
   for(const p of pipes)drawPipe(p.x,p.topH);
-  const g=ctx.createLinearGradient(0,GROUND,0,H);g.addColorStop(0,'#0a1f30');g.addColorStop(1,'#050b14');ctx.fillStyle=g;ctx.fillRect(0,GROUND,W,H-GROUND);
-  ctx.strokeStyle='rgba(0,245,255,0.5)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,GROUND);ctx.lineTo(W,GROUND);ctx.stroke();
-  ctx.fillStyle='rgba(0,245,255,0.07)';for(let x=groundX;x<W;x+=28)ctx.fillRect(x,GROUND+8,16,4);
+  const g=ctx.createLinearGradient(0,GROUND,0,H);g.addColorStop(0,'#5a3a10');g.addColorStop(1,'#2e1a06');ctx.fillStyle=g;ctx.fillRect(0,GROUND,W,H-GROUND);
+  ctx.fillStyle='rgba(201,168,76,0.4)';ctx.fillRect(0,GROUND,W,2);
+  ctx.fillStyle='rgba(201,168,76,0.08)';for(let x=groundX;x<W;x+=28)ctx.fillRect(x,GROUND+8,16,4);
   drawBird();
   for(const p of parts){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.col;ctx.fillRect(p.x-p.s/2,p.y-p.s/2,p.s,p.s);}ctx.globalAlpha=1;
-  if(state==='playing'){ctx.textAlign='center';ctx.font='bold 28px "Press Start 2P",monospace';ctx.fillStyle='rgba(0,245,255,0.15)';ctx.fillText(score,W/2+2,52);ctx.fillStyle='#00f5ff';ctx.fillText(score,W/2,50);ctx.textAlign='left';}
+  if(state==='playing'){ctx.textAlign='center';ctx.font='bold 26px "Press Start 2P",monospace';ctx.fillStyle='rgba(201,168,76,0.2)';ctx.fillText(score,W/2+2,52);ctx.fillStyle='#e8c97a';ctx.fillText(score,W/2,50);ctx.textAlign='left';}
   if(state==='idle')drawIdle();
   if(state==='dead')drawDead();
 }
-function drawPipe(x,topH){
-  const cH=20,cW=PW+12,cX=x-6,botY=topH+GAP,botH=GROUND-botY;
-  ctx.fillStyle='#003a4a';ctx.fillRect(x,0,PW,topH-cH);ctx.fillStyle='#004d63';ctx.fillRect(cX,topH-cH,cW,cH);ctx.fillStyle='rgba(0,245,255,0.3)';ctx.fillRect(x+5,0,6,topH-cH);
-  ctx.strokeStyle='rgba(0,245,255,0.6)';ctx.lineWidth=1;ctx.strokeRect(cX,topH-cH,cW,cH);
-  ctx.fillStyle='#004d63';ctx.fillRect(cX,botY,cW,cH);ctx.strokeRect(cX,botY,cW,cH);
-  ctx.fillStyle='#003a4a';ctx.fillRect(x,botY+cH,PW,botH-cH);ctx.fillStyle='rgba(0,245,255,0.3)';ctx.fillRect(x+5,botY+cH,6,botH-cH);
-}
-function drawBird(){
-  ctx.save();ctx.translate(B.x,B.y);ctx.rotate(B.angle);
-  ctx.shadowColor='#00f5ff';ctx.shadowBlur=16;
-  ctx.fillStyle='#00c8dd';ctx.beginPath();ctx.ellipse(0,0,16,14,0,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
-  const wy=Math.sin(B.wing)*5;ctx.fillStyle='#0090a8';ctx.beginPath();ctx.ellipse(-5,-3+wy,9,5,-0.3,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#66eeff';ctx.beginPath();ctx.ellipse(3,4,9,7,0.2,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(8,-4,5.5,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#001a22';ctx.beginPath();ctx.arc(9.5,-4,2.8,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#00f5ff';ctx.beginPath();ctx.arc(10.5,-5.5,1,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#00a0b8';ctx.beginPath();ctx.moveTo(13,-1);ctx.lineTo(21,2);ctx.lineTo(13,5);ctx.closePath();ctx.fill();
-  ctx.restore();
-}
+function drawPipe(x,topH){const cH=20,cW=PW+12,cX=x-6,botY=topH+GAP,botH=GROUND-botY;ctx.fillStyle='#5a3a10';ctx.fillRect(x,0,PW,topH-cH);ctx.fillStyle='#6b4a18';ctx.fillRect(cX,topH-cH,cW,cH);ctx.fillStyle='rgba(201,168,76,0.2)';ctx.fillRect(x+5,0,7,topH-cH);ctx.strokeStyle='rgba(201,168,76,0.35)';ctx.lineWidth=1;ctx.strokeRect(cX,topH-cH,cW,cH);ctx.fillStyle='#6b4a18';ctx.fillRect(cX,botY,cW,cH);ctx.strokeRect(cX,botY,cW,cH);ctx.fillStyle='#5a3a10';ctx.fillRect(x,botY+cH,PW,botH-cH);ctx.fillStyle='rgba(201,168,76,0.2)';ctx.fillRect(x+5,botY+cH,7,botH-cH);}
+function drawBird(){ctx.save();ctx.translate(B.x,B.y);ctx.rotate(B.angle);ctx.fillStyle='#f7c948';ctx.beginPath();ctx.ellipse(0,0,16,14,0,0,Math.PI*2);ctx.fill();const wy=Math.sin(B.wing)*5;ctx.fillStyle='#d4a000';ctx.beginPath();ctx.ellipse(-5,-3+wy,9,5,-0.3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ffe98a';ctx.beginPath();ctx.ellipse(3,4,9,7,0.2,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(8,-4,5.5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#1a1008';ctx.beginPath();ctx.arc(9.5,-4,2.8,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(10.5,-5.5,1,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ff8c00';ctx.beginPath();ctx.moveTo(13,-1);ctx.lineTo(21,2);ctx.lineTo(13,5);ctx.closePath();ctx.fill();ctx.restore();}
 function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
-function drawIdle(){
-  ctx.fillStyle='rgba(0,10,20,0.75)';rr(W/2-120,H/2-95,240,115,6);ctx.fill();
-  ctx.strokeStyle='rgba(0,245,255,0.5)';ctx.lineWidth=1;rr(W/2-120,H/2-95,240,115,6);ctx.stroke();
-  ctx.textAlign='center';ctx.shadowColor='#00f5ff';ctx.shadowBlur=12;
-  ctx.fillStyle='#00f5ff';ctx.font='14px "Press Start 2P",monospace';ctx.fillText('FLAPPY BIRD',W/2,H/2-50);ctx.shadowBlur=0;
-  ctx.fillStyle='rgba(200,240,255,0.65)';ctx.font='8px "Press Start 2P",monospace';ctx.fillText('TRYCK FÖR ATT STARTA',W/2,H/2-18);
-  ctx.font='20px sans-serif';ctx.fillText('👆  SPACE  🖱️',W/2,H/2+14);ctx.textAlign='left';
-}
-function drawDead(){
-  ctx.fillStyle='rgba(0,10,20,0.78)';rr(W/2-125,H/2-125,250,215,6);ctx.fill();
-  ctx.strokeStyle='rgba(0,245,255,0.4)';ctx.lineWidth=1;rr(W/2-125,H/2-125,250,215,6);ctx.stroke();
-  ctx.textAlign='center';ctx.shadowColor='#ff4466';ctx.shadowBlur=12;
-  ctx.fillStyle='#ff4466';ctx.font='13px "Press Start 2P",monospace';ctx.fillText('GAME OVER',W/2,H/2-84);ctx.shadowBlur=0;
-  ctx.fillStyle='rgba(200,240,255,0.5)';ctx.font='8px "Press Start 2P",monospace';ctx.fillText('POÄNG',W/2,H/2-50);
-  ctx.shadowColor='#00f5ff';ctx.shadowBlur=10;ctx.fillStyle='#00f5ff';ctx.font='24px "Press Start 2P",monospace';ctx.fillText(score,W/2,H/2-20);ctx.shadowBlur=0;
-  ctx.fillStyle='rgba(200,240,255,0.4)';ctx.font='7px "Press Start 2P",monospace';ctx.fillText('BÄSTA: '+best,W/2,H/2+8);
-  ctx.fillStyle='rgba(0,245,255,0.15)';rr(W/2-80,H/2+24,160,44,4);ctx.fill();
-  ctx.strokeStyle='rgba(0,245,255,0.7)';ctx.lineWidth=1.5;rr(W/2-80,H/2+24,160,44,4);ctx.stroke();
-  ctx.fillStyle='#00f5ff';ctx.font='9px "Press Start 2P",monospace';ctx.fillText('▶  SPELA IGEN',W/2,H/2+52);ctx.textAlign='left';
-}
-function spawnParts(x,y){const cols=['#00f5ff','#0090a8','#fff','#ff4466'];for(let i=0;i<14;i++){const a=(Math.PI*2/14)*i+Math.random()*.4,spd=2+Math.random()*5;parts.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-1,life:1,s:4+Math.random()*5,col:cols[i%4]});}}
+function drawIdle(){ctx.fillStyle='rgba(20,10,2,0.82)';rr(W/2-120,H/2-95,240,115,4);ctx.fill();ctx.strokeStyle='rgba(201,168,76,0.4)';ctx.lineWidth=1;rr(W/2-120,H/2-95,240,115,4);ctx.stroke();ctx.textAlign='center';ctx.fillStyle='#e8c97a';ctx.font='13px "Press Start 2P",monospace';ctx.fillText('FLAPPY BIRD',W/2,H/2-50);ctx.fillStyle='rgba(245,234,216,0.55)';ctx.font='7px "Press Start 2P",monospace';ctx.fillText('TRYCK FÖR ATT STARTA',W/2,H/2-18);ctx.font='20px sans-serif';ctx.fillText('👆  SPACE  🖱️',W/2,H/2+14);ctx.textAlign='left';}
+function drawDead(){ctx.fillStyle='rgba(20,10,2,0.85)';rr(W/2-125,H/2-125,250,215,4);ctx.fill();ctx.strokeStyle='rgba(201,168,76,0.35)';ctx.lineWidth=1;rr(W/2-125,H/2-125,250,215,4);ctx.stroke();ctx.textAlign='center';ctx.fillStyle='#c0392b';ctx.font='12px "Press Start 2P",monospace';ctx.fillText('GAME OVER',W/2,H/2-84);ctx.fillStyle='rgba(245,234,216,0.45)';ctx.font='7px "Press Start 2P",monospace';ctx.fillText('POÄNG',W/2,H/2-50);ctx.fillStyle='#e8c97a';ctx.font='22px "Press Start 2P",monospace';ctx.fillText(score,W/2,H/2-20);ctx.fillStyle='rgba(245,234,216,0.35)';ctx.font='6px "Press Start 2P",monospace';ctx.fillText('BÄSTA: '+best,W/2,H/2+8);ctx.fillStyle='rgba(201,168,76,0.12)';rr(W/2-80,H/2+24,160,44,3);ctx.fill();ctx.strokeStyle='rgba(201,168,76,0.5)';ctx.lineWidth=1;rr(W/2-80,H/2+24,160,44,3);ctx.stroke();ctx.fillStyle='#e8c97a';ctx.font='8px "Press Start 2P",monospace';ctx.fillText('▶  SPELA IGEN',W/2,H/2+52);ctx.textAlign='left';}
+function spawnParts(x,y){const cols=['#c9a84c','#e8c97a','#f5ead8','#c0392b'];for(let i=0;i<14;i++){const a=(Math.PI*2/14)*i+Math.random()*.4,spd=2+Math.random()*5;parts.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-1,life:1,s:4+Math.random()*5,col:cols[i%4]});}}
 document.getElementById('bestEl').textContent=best;
 function idleLoop(t){if(state!=='idle')return;B.y=H/2+Math.sin(t*.003)*10;B.vy=0;B.angle=0;B.wing=t*.012;render();requestAnimationFrame(idleLoop);}
 requestAnimationFrame(idleLoop);
